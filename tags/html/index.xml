@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>html on Mr.lemom</title>
-    <link>https://example.com/tags/html/</link>
+    <link>https://lemomzhang.github.io/tags/html/</link>
     <description>Recent content in html on Mr.lemom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Fri, 06 Sep 2019 19:11:09 +0800</lastBuildDate>
     
-	<atom:link href="https://example.com/tags/html/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://lemomzhang.github.io/tags/html/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HTML入门笔记1</title>
-      <link>https://example.com/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</link>
+      <link>https://lemomzhang.github.io/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</link>
       <pubDate>Fri, 06 Sep 2019 19:11:09 +0800</pubDate>
       
-      <guid>https://example.com/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</guid>
+      <guid>https://lemomzhang.github.io/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</guid>
       <description>HTML之父 1990年左右诞生 李爵士（Tim Berners-Lee）发明了WWW，同时发明了HTML，HTTP，URL 目的是网上冲浪 HTML</description>
     </item>
     
     <item>
       <title>HTML常用标签</title>
-      <link>https://example.com/2019/09/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</link>
+      <link>https://lemomzhang.github.io/2019/09/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</link>
       <pubDate>Tue, 03 Sep 2019 19:11:09 +0800</pubDate>
       
-      <guid>https://example.com/2019/09/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</guid>
+      <guid>https://lemomzhang.github.io/2019/09/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</guid>
       <description>a标签 属性 href： ​ 值为网址：//google.com ​ 值为路径：/a/b/c或a/b/c或index.html或./index.html</description>
     </item>
     

@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vue on Mr.lemom</title>
-    <link>https://example.com/tags/vue/</link>
+    <link>https://lemomzhang.github.io/tags/vue/</link>
     <description>Recent content in Vue on Mr.lemom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Thu, 07 Nov 2019 12:11:09 +0800</lastBuildDate>
     
-	<atom:link href="https://example.com/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://lemomzhang.github.io/tags/vue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>浅析Vue两个版本</title>
-      <link>https://example.com/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/</link>
+      <link>https://lemomzhang.github.io/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/</link>
       <pubDate>Thu, 07 Nov 2019 12:11:09 +0800</pubDate>
       
-      <guid>https://example.com/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/</guid>
+      <guid>https://lemomzhang.github.io/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/</guid>
       <description>Vue完整版和非完整版的区别 Vue完整版 Vue非完整版 特点 有compiler 没有compiler 视图 写在HTML里或写在template选项</description>
     </item>
     

@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>css on Mr.lemom</title>
-    <link>https://example.com/tags/css/</link>
+    <link>https://lemomzhang.github.io/tags/css/</link>
     <description>Recent content in css on Mr.lemom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sat, 07 Sep 2019 11:00:09 +0800</lastBuildDate>
     
-	<atom:link href="https://example.com/tags/css/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://lemomzhang.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CSS 知识总结</title>
-      <link>https://example.com/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</link>
+      <link>https://lemomzhang.github.io/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</link>
       <pubDate>Sat, 07 Sep 2019 11:00:09 +0800</pubDate>
       
-      <guid>https://example.com/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</guid>
+      <guid>https://lemomzhang.github.io/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</guid>
       <description>CSS发明 CSS首先由赖先生（Hakon Wium Lie）提出 CSS的牛X之处 层叠样式表 样式层叠：可以多次对用已选择器进行样式声明 选择器层叠：可以用</description>
     </item>
     

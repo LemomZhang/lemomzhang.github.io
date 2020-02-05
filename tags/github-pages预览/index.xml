@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>github pages预览 on Mr.lemom</title>
-    <link>https://example.com/tags/github-pages%E9%A2%84%E8%A7%88/</link>
+    <link>https://lemomzhang.github.io/tags/github-pages%E9%A2%84%E8%A7%88/</link>
     <description>Recent content in github pages预览 on Mr.lemom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 01 Sep 2019 19:11:09 +0800</lastBuildDate>
     
-	<atom:link href="https://example.com/tags/github-pages%E9%A2%84%E8%A7%88/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://lemomzhang.github.io/tags/github-pages%E9%A2%84%E8%A7%88/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>如何使用 GitHub Pages 预览 HTML</title>
-      <link>https://example.com/2019/09/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-github-pages-%E9%A2%84%E8%A7%88-html/</link>
+      <link>https://lemomzhang.github.io/2019/09/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-github-pages-%E9%A2%84%E8%A7%88-html/</link>
       <pubDate>Sun, 01 Sep 2019 19:11:09 +0800</pubDate>
       
-      <guid>https://example.com/2019/09/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-github-pages-%E9%A2%84%E8%A7%88-html/</guid>
+      <guid>https://lemomzhang.github.io/2019/09/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-github-pages-%E9%A2%84%E8%A7%88-html/</guid>
       <description>上传项目到github(略) 打开项目，选择Settings 如图： 下滑至此位置，选择master分支: 选好后直接打开给出的连接(绿色处): 然后</description>
     </item>
     
