@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>JQuery基本操作 | Mr.lemom</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="MR.Lemom"><link rel="prev" href="https://example.com/2019/09/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" /><link rel="next" href="https://example.com/2019/10/%E6%B5%85%E6%9E%90mvc/" /><link rel="canonical" href="https://example.com/2019/10/jquery%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JQuery基本操作"/>
+<meta name="twitter:description" content="jQuery 获取元素 $(document) //选择整个文档对象 $(&#39;#myId&#39;) //选择ID为myId的网页元素 $(&#39;div.myClass&#39;) // 选择class为myClass的div元素 $(&#39;input[name=first]&#39;) // 选择name属性等于fi"/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JQuery基本操作",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/2019\/10\/jquery%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "JQuery","wordcount":  758 ,
+        "url": "https:\/\/example.com\/2019\/10\/jquery%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C\/","datePublished": "2019-10-02T13:20:09\x2b08:00","dateModified": "2019-10-02T13:20:09\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://example.com/">Mr.lemom</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item"
+                href="https://example.com/posts" title="">文章</a><a class="menu-item"
+                href="https://example.com/tags" title="">标签</a><a class="menu-item"
+                href="https://example.com/categories" title="">分类</a><a class="menu-item"
+                href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://example.com/">Mr.lemom</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="https://example.com/posts" title="">文章</a><a class="menu-item" href="https://example.com/tags" title="">标签</a><a class="menu-item" href="https://example.com/categories" title="">分类</a><a class="menu-item" href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">JQuery基本操作</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="https://example.com/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>lemom
+                </a>&nbsp;</div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-10-02>2019-10-02</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 758 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 2 分钟&nbsp;</div>
+        </div><div class="post-content">
+
+<h1 id="jquery-获取元素">jQuery 获取元素</h1>
+
+<pre><code>$(document) //选择整个文档对象
+$('#myId') //选择ID为myId的网页元素
+$('div.myClass') // 选择class为myClass的div元素 
+$('input[name=first]') // 选择name属性等于first的input元素
+</code></pre>
+
+<h1 id="jquery-链式操作">jQuery 链式操作</h1>
+
+<p>原理:每一步的jQuery操作，返回的都是一个jQuery对象，所以不同操作可以连在一起。</p>
+
+<pre><code>$('div') //找到div元素
+.find('h3') //选择其中的h3元素
+.eq(2) //选择第3个h3元素
+.html('Hello'); //将它的内容改为Hello
+</code></pre>
+
+<h1 id="jquery-创建元素">jQuery 创建元素</h1>
+
+<p>把新元素直接传入jQuery的构造函数</p>
+
+<pre><code>$('&lt;p&gt;Hello&lt;/p&gt;');
+$('&lt;li class=&quot;new&quot;&gt;new list item&lt;/li&gt;');
+$('ul').append('&lt;li&gt;list item&lt;/li&gt;');
+</code></pre>
+
+<h1 id="jquery-移动元素">jQuery 移动元素</h1>
+
+<p>提供两组方法，来操作元素在网页中的位置移动。
+一组方法是直接移动该元素，另一组方法是移动其他元素，使得目标元素达到想要的位置。</p>
+
+<pre><code>//第一种方法是使用.insertAfter()，把div元素移动p元素后面：
+$('div').insertAfter($('p'));
+//第二种方法是使用.after()，把p元素加到div元素前面：
+$('p').after($('div'));
+</code></pre>
+
+<p>其他4对操作方法如下：</p>
+
+<blockquote>
+<p>.insertAfter()和.after()：在现存元素的外部，从后面插入元素</p>
+
+<p>.insertBefore()和.before()：在现存元素的外部，从前面插入元素</p>
+
+<p>.appendTo()和.append()：在现存元素的内部，从后面插入元素</p>
+
+<p>.prependTo()和.prepend()：在现存元素的内部，从前面插入元素</p>
+</blockquote>
+
+<h1 id="jquery-修改元素的属性">jQuery 修改元素的属性</h1>
+
+<p>使用同一个函数，来完成取值（getter）和赋值（setter）</p>
+
+<pre><code>$('h1').html(); //html()没有参数，表示取出h1的值
+$('h1').html('Hello'); //html()有参数Hello，表示对h1进行赋值
+</code></pre>
+
+<p>常见取值和赋值</p>
+
+<pre><code>.html() 取出或设置html内容
+.text() 取出或设置text内容
+.attr() 取出或设置某个属性的值
+.width() 取出或设置某个元素的宽度
+.height() 取出或设置某个元素的高度
+.val() 取出某个表单元素的值
+</code></pre>
+
+<p>删除元素使用.remove()和.detach()。</p>
+
+<p>两者的区别在于，前者不保留被删除元素的事件，后者保留，有利于重新插入文档时使用。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-10-02 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span class="tag">
+                        <a href="https://example.com/tags/jquery/"><i class="fas fa-tag fa-fw"></i>&nbsp;JQuery</a>&nbsp;
+                    </span></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://example.com/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="https://example.com/2019/09/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" class="prev" rel="prev" title="JS对象基本用法"><i class="fas fa-angle-left fa-fw"></i>JS对象基本用法</a>
+            <a href="https://example.com/2019/10/%E6%B5%85%E6%9E%90mvc/" class="next" rel="next" title="浅析MVC">浅析MVC<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a
+                    href="https://example.com/" target="_blank">lemom</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
+            });
+        });
+    </script><script src="/js/blog.min.js"></script></body>
+</html>

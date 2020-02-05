@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>浅析URL | Mr.lemom</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="MR.Lemom"><link rel="prev" href="https://example.com/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" /><link rel="next" href="https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/" /><link rel="canonical" href="https://example.com/2019/09/%E6%B5%85%E6%9E%90url/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浅析URL"/>
+<meta name="twitter:description" content="URL的定义 统一资源标识符（英语：Uniform Resource Identifier，缩写：URI）在计算机术语中是一个用于标识某一互联网资源名称的字符串"/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "浅析URL",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/2019\/09\/%E6%B5%85%E6%9E%90url\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "url","wordcount":  716 ,
+        "url": "https:\/\/example.com\/2019\/09\/%E6%B5%85%E6%9E%90url\/","datePublished": "2019-09-07T12:11:09\x2b08:00","dateModified": "2019-09-07T12:11:09\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://example.com/">Mr.lemom</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item"
+                href="https://example.com/posts" title="">文章</a><a class="menu-item"
+                href="https://example.com/tags" title="">标签</a><a class="menu-item"
+                href="https://example.com/categories" title="">分类</a><a class="menu-item"
+                href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://example.com/">Mr.lemom</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="https://example.com/posts" title="">文章</a><a class="menu-item" href="https://example.com/tags" title="">标签</a><a class="menu-item" href="https://example.com/categories" title="">分类</a><a class="menu-item" href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">浅析URL</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="https://example.com/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>lemom
+                </a>&nbsp;</div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-09-07>2019-09-07</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 716 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 2 分钟&nbsp;</div>
+        </div><div class="post-content">
+
+<h1 id="url的定义">URL的定义</h1>
+
+<blockquote>
+<p>统一资源标识符（英语：Uniform Resource Identifier，缩写：URI）在计算机术语中是一个用于标识某一互联网资源名称的字符串。
+该种标识允许用户对网络中（一般指万维网）的资源通过特定的协议进行交互操作。URI的最常见的形式是统一资源定位符（URL），经常指定为非正式的网址。更罕见的用法是统一资源名称（URN），其目的是通过提供一种途径。用于在特定的名字空间资源的标识，以补充网址。</p>
+</blockquote>
+
+<h1 id="url组成部分">URL组成部分</h1>
+
+<blockquote>
+<p>URL = 协议+域名或IP+端口号+路径+查询字符串+锚点</p>
+</blockquote>
+
+<ul>
+<li>协议：常用的为HTTP(80端口)或HTTPS(443端口)：提供网页访问的服务协议</li>
+<li>域名(IP)：类似于 qq.com，其实是对IP的别称。
+一个域名可以对应不同IP，这也叫做负载均衡，减轻一台机器的压力；
+一个IP也可以对应不同的域名，这叫共享主机，一般不这样；而域名和IP是通过DNS对应起来的
+
+<ul>
+<li>域名的分类：</li>
+<li>顶级域名：com</li>
+<li>二级域名：baidu.com</li>
+<li>三级域名：www.baidu.com</li>
+</ul></li>
+<li>端口号：指明了一台服务器上的服务程序的号码</li>
+<li>路径：主要是指明要访问的页面</li>
+<li>查询字符串：主要是在同一个页面访问返回的不同的内容</li>
+<li>锚点：主要访问同一个页面中的不同位置，该锚点信息不会发送到服务器，实际上也不支持中文</li>
+</ul>
+
+<h1 id="dns-的作用">DNS 的作用</h1>
+
+<blockquote>
+<p>DNS （Domain Name System 的缩写）的作用非常简单，就是根据域名查出IP地址。你可以把它想象成一本巨大的电话本。举例来说，如果你要访问域名
+math.stackexchange.com，首先要通过DNS查询它的IP地址是151.101.129.69
+&ndash;摘自阮一峰的解释</p>
+
+<h1 id="nslookup-命令怎么用">nslookup 命令怎么用</h1>
+
+<p>作用：查询DNS的记录，查看域名解析是否正常，在网络故障的时候用来诊断网络问题。
+使用方法如图：
+<img src="/nslookup.png" alt="" /></p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-09-07 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span class="tag">
+                        <a href="https://example.com/tags/url/"><i class="fas fa-tag fa-fw"></i>&nbsp;url</a>&nbsp;
+                    </span></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://example.com/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="https://example.com/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" class="prev" rel="prev" title="CSS 知识总结"><i class="fas fa-angle-left fa-fw"></i>CSS 知识总结</a>
+            <a href="https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/" class="next" rel="next" title="探索JavaScript的发展">探索JavaScript的发展<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a
+                    href="https://example.com/" target="_blank">lemom</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
+            });
+        });
+    </script><script src="/js/blog.min.js"></script></body>
+</html>

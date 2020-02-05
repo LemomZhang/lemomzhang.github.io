@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>浅析Vue两个版本 | Mr.lemom</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="MR.Lemom"><link rel="prev" href="https://example.com/2019/10/%E6%B5%85%E6%9E%90mvc/" /><link rel="canonical" href="https://example.com/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浅析Vue两个版本"/>
+<meta name="twitter:description" content="Vue完整版和非完整版的区别 Vue完整版 Vue非完整版 特点 有compiler 没有compiler 视图 写在HTML里或写在template选项"/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "浅析Vue两个版本",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/2019\/11\/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Vue","wordcount":  461 ,
+        "url": "https:\/\/example.com\/2019\/11\/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC\/","datePublished": "2019-11-07T12:11:09\x2b08:00","dateModified": "2019-11-07T12:11:09\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://example.com/">Mr.lemom</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item"
+                href="https://example.com/posts" title="">文章</a><a class="menu-item"
+                href="https://example.com/tags" title="">标签</a><a class="menu-item"
+                href="https://example.com/categories" title="">分类</a><a class="menu-item"
+                href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://example.com/">Mr.lemom</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="https://example.com/posts" title="">文章</a><a class="menu-item" href="https://example.com/tags" title="">标签</a><a class="menu-item" href="https://example.com/categories" title="">分类</a><a class="menu-item" href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">浅析Vue两个版本</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="https://example.com/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>lemom
+                </a>&nbsp;</div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-11-07>2019-11-07</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 461 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 1 分钟&nbsp;</div>
+        </div><div class="post-content">
+
+<a class="post-dummy-target" id="vue完整版和非完整版的区别"></a><h2>Vue完整版和非完整版的区别</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Vue完整版</th>
+<th>Vue非完整版</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>特点</td>
+<td>有compiler</td>
+<td>没有compiler</td>
+</tr>
+
+<tr>
+<td>视图</td>
+<td>写在HTML里或写在template选项</td>
+<td>写在render函数里用h来创建标签</td>
+</tr>
+
+<tr>
+<td>cdn引入</td>
+<td>vue.js</td>
+<td>vue.runtime.js</td>
+</tr>
+
+<tr>
+<td>webpack引入</td>
+<td>需要配置alias</td>
+<td>默认使用非完整版</td>
+</tr>
+
+<tr>
+<td>@vue/cli引入</td>
+<td>需要额外配置</td>
+<td>默认使用非完整版</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>经总结一般使用非完整版，配合vue-loader和vue文件
+vue-loader可以把vue文件里的html转换为h函数</p>
+</blockquote>
+
+<hr />
+
+<p>template在完整版中使用:
+方法一：写在构造函数中</p>
+
+<pre><code class="language-js">  new Vue({
+      el:'#app',
+      template:'&lt;div&gt;hi&lt;/div&gt;'  //会自动渲染在绑定#app的页面中
+  })
+</code></pre>
+
+<p>方法二：写在template标签里</p>
+
+<pre><code class="language-js">  &lt;div id=&quot;app&quot;&gt;
+    &lt;template id=&quot;tem&quot;&gt;&lt;h3&gt;模板&lt;/h3&gt;&lt;/template&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    new Vue({
+        el:'#app',
+        template:&quot;#tem&quot;
+    })
+  &lt;/script&gt;
+</code></pre>
+
+<p>方法三：写在script标签里</p>
+
+<pre><code class="language-js">  &lt;script type=&quot;x-template&quot; id=&quot;tem&quot;&gt;
+    &lt;h3&gt;我是模板&lt;/h3&gt;
+  &lt;/script&gt;
+  &lt;script&gt;
+    new Vue({
+        el:'#app',
+        template:&quot;#tem&quot;
+    })
+  &lt;/script&gt;
+</code></pre>
+
+<p>render的使用:
+方法一：</p>
+
+<pre><code class="language-js">  new({
+      el:'#app',
+      render:createElement=&gt;createElement('div',['HelloVue'])
+  })
+</code></pre>
+
+<p>方法二：向render函数传入配置对象</p>
+
+<pre><code class="language-js">var app={
+    template:'&lt;div&gt;{{name}}&lt;/div&gt;',
+    data(){
+        return {
+            name:'jack'
+        }
+    }
+}
+
+new Vue({
+    el:'#app',
+    render:createElement=&gt;createElement(app)
+})
+</code></pre>
+
+<p>方法三：</p>
+
+<pre><code class="language-js">var app={
+    render:createElement=&gt;createElement('div',['HelloVue'])
+}
+
+new Vue({
+    el:'#app',
+    render:createElement=&gt;createElement(app)
+})
+</code></pre>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-11-07 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span class="tag">
+                        <a href="https://example.com/tags/vue/"><i class="fas fa-tag fa-fw"></i>&nbsp;Vue</a>&nbsp;
+                    </span></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://example.com/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="https://example.com/2019/10/%E6%B5%85%E6%9E%90mvc/" class="prev" rel="prev" title="浅析MVC"><i class="fas fa-angle-left fa-fw"></i>浅析MVC</a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a
+                    href="https://example.com/" target="_blank">lemom</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
+            });
+        });
+    </script><script src="/js/blog.min.js"></script></body>
+</html>

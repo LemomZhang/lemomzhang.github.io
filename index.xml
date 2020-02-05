@@ -1,0 +1,2282 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Mr.lemom | Mr.lemom</title>
+        <link>https://example.com/</link>
+        <description>Mr.lemom | Mr.lemom</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 07 Nov 2019 12:11:09 +0800</lastBuildDate><atom:link href="https://example.com/" rel="self" type="application/rss+xml" /><item>
+                <title>浅析Vue两个版本</title>
+                <link>https://example.com/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/</link>
+                <pubDate>Thu, 07 Nov 2019 12:11:09 +0800</pubDate><guid>https://example.com/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/</guid>
+                <description>
+
+&lt;h2 id=&#34;vue完整版和非完整版的区别&#34;&gt;Vue完整版和非完整版的区别&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Vue完整版&lt;/th&gt;
+&lt;th&gt;Vue非完整版&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;特点&lt;/td&gt;
+&lt;td&gt;有compiler&lt;/td&gt;
+&lt;td&gt;没有compiler&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;视图&lt;/td&gt;
+&lt;td&gt;写在HTML里或写在template选项&lt;/td&gt;
+&lt;td&gt;写在render函数里用h来创建标签&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;cdn引入&lt;/td&gt;
+&lt;td&gt;vue.js&lt;/td&gt;
+&lt;td&gt;vue.runtime.js&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;webpack引入&lt;/td&gt;
+&lt;td&gt;需要配置alias&lt;/td&gt;
+&lt;td&gt;默认使用非完整版&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;@vue/cli引入&lt;/td&gt;
+&lt;td&gt;需要额外配置&lt;/td&gt;
+&lt;td&gt;默认使用非完整版&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;经总结一般使用非完整版，配合vue-loader和vue文件
+vue-loader可以把vue文件里的html转换为h函数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;template在完整版中使用:
+方法一：写在构造函数中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;  new Vue({
+      el:&#39;#app&#39;,
+      template:&#39;&amp;lt;div&amp;gt;hi&amp;lt;/div&amp;gt;&#39;  //会自动渲染在绑定#app的页面中
+  })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;方法二：写在template标签里&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;  &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+    &amp;lt;template id=&amp;quot;tem&amp;quot;&amp;gt;&amp;lt;h3&amp;gt;模板&amp;lt;/h3&amp;gt;&amp;lt;/template&amp;gt;
+  &amp;lt;/div&amp;gt;
+  &amp;lt;script&amp;gt;
+    new Vue({
+        el:&#39;#app&#39;,
+        template:&amp;quot;#tem&amp;quot;
+    })
+  &amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;方法三：写在script标签里&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;  &amp;lt;script type=&amp;quot;x-template&amp;quot; id=&amp;quot;tem&amp;quot;&amp;gt;
+    &amp;lt;h3&amp;gt;我是模板&amp;lt;/h3&amp;gt;
+  &amp;lt;/script&amp;gt;
+  &amp;lt;script&amp;gt;
+    new Vue({
+        el:&#39;#app&#39;,
+        template:&amp;quot;#tem&amp;quot;
+    })
+  &amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;render的使用:
+方法一：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;  new({
+      el:&#39;#app&#39;,
+      render:createElement=&amp;gt;createElement(&#39;div&#39;,[&#39;HelloVue&#39;])
+  })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;方法二：向render函数传入配置对象&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var app={
+    template:&#39;&amp;lt;div&amp;gt;{{name}}&amp;lt;/div&amp;gt;&#39;,
+    data(){
+        return {
+            name:&#39;jack&#39;
+        }
+    }
+}
+
+new Vue({
+    el:&#39;#app&#39;,
+    render:createElement=&amp;gt;createElement(app)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;方法三：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var app={
+    render:createElement=&amp;gt;createElement(&#39;div&#39;,[&#39;HelloVue&#39;])
+}
+
+new Vue({
+    el:&#39;#app&#39;,
+    render:createElement=&amp;gt;createElement(app)
+})
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+            </item><item>
+                <title>浅析MVC</title>
+                <link>https://example.com/2019/10/%E6%B5%85%E6%9E%90mvc/</link>
+                <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate><guid>https://example.com/2019/10/%E6%B5%85%E6%9E%90mvc/</guid>
+                <description>
+
+&lt;h2 id=&#34;mvc-三个对象&#34;&gt;MVC 三个对象&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;MVC&lt;/code&gt;是一种架构模式，它将应用抽象为3个部分：模型（数据）、视图、控制器（分发器）。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;MVC&lt;/code&gt;包括三类对象，将他们分离以提高灵活性和复用性。&lt;/p&gt;
+
+&lt;p&gt;M：模型model用于封装与应用程序的业务逻辑相关的数据以及对数据的处理方法，会有一个或多个视图监听此模型。一旦模型的数据发生变化，模型将通知有关的视图。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const model = {
+    //数据
+    data: &#39;&#39;
+    //初始化
+    init(){}
+    //方法
+    save(){}
+    update(){}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;V：视图view是它在屏幕上的表示，描绘的是model的当前状态。当模型的数据发生变化，视图相应地得到刷新自己的机会。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const view = {
+    init() {}
+    template: &#39;&amp;lt;h1&amp;gt;hello&amp;lt;/h1&#39;&amp;gt;   //视图渲染
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;C：控制器controller定义用户界面对用户输入的响应方式，起到不同层面间的组织作用，用于控制应用程序的流程，它处理用户的行为和数据model上的改变。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const controller = {
+    view: null,
+    model: null,
+    init(view, model){
+        this.view = view
+        this.model = model
+        this.bindEvents()
+    }
+    render(){
+        this.view.querySelector(&#39;name&#39;).innerText = this.model.data.name
+    },
+    bindEvents(){}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;eventbus&#34;&gt;EventBus&lt;/h2&gt;
+
+&lt;p&gt;EventBus是一种设计模式，主要用于组件或对象间的通信简化
+EventBus包含很多方法，如：on方法用来监听事件，trigger方法用来触发事件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const model = {
+    data: {
+        i: come from somewhere
+    }，
+    update(data) {
+        Object.assign(model.data, data)
+        eventBus.trigger(&#39;model:updated&#39;)   //触发 model:updated 事件
+    }
+}
+const controller = {
+    //初始化方法
+    init() {
+        //初始化渲染
+        view.render(model.data.i)
+        eventBus.on(&#39;model:updated&#39;, () =&amp;gt; {    //监听 model:updated 方法并渲染更新页面
+            v.render(model.data.i)
+        })
+    },
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;表驱动编程&#34;&gt;表驱动编程&lt;/h2&gt;
+
+&lt;p&gt;所谓表驱动法(Table-Driven Approach),简单讲是指用查表的方法获取值。&lt;/p&gt;
+
+&lt;p&gt;假设我们要把一个数字的数组按星期几的形式输出，那么我们可能这样做：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let arr=[2,5,6,3]
+let newArr =[]
+arr.forEach(item=&amp;gt;{
+  if(item===1){
+    newArr.push(&#39;星期一&#39;)
+  }else if(item===2){
+    newArr.push(&#39;星期二&#39;)
+  }else if(item===3){
+    newArr.push(&#39;星期三&#39;)
+  }else if(item===4){
+    newArr.push(&#39;星期四&#39;)
+  }else if(item===5){
+    newArr.push(&#39;星期五&#39;)
+  }else if(item===6){
+    newArr.push(&#39;星期六&#39;)
+  }else{
+    newArr.push(&#39;星期日&#39;)
+  }
+})
+console.log(newArr)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如上这样可能写很多类似的代码，如果用表驱动法可以这样做：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const week={
+  1:&amp;quot;星期一&amp;quot;,
+  2:&amp;quot;星期二&amp;quot;,
+  3:&amp;quot;星期三&amp;quot;,
+  4:&amp;quot;星期四&amp;quot;,
+  5:&amp;quot;星期五&amp;quot;,
+  6:&amp;quot;星期六&amp;quot;,
+  7:&amp;quot;星期日&amp;quot;
+}
+arr.forEach(item=&amp;gt;{
+  newArr.push(week[item])
+})
+console.log(newArr)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;由此可看出，使用表驱动可以简化代码，使结构更加简洁清晰&lt;/p&gt;
+
+&lt;h2 id=&#34;模块化理解&#34;&gt;模块化理解&lt;/h2&gt;
+
+&lt;p&gt;首先假如没有模块化，引入外部文件是这样的:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&amp;quot;jquery.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;main.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;a.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;b.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;c.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所有js文件都放在了一起，而且这些文件的顺序也不能出错，如jquery需要先引入，才能在其他的文件中使用jquery，缺点如下：
+* 污染全局作用域
+* 维护成本高
+* 依赖关系不明显&lt;/p&gt;
+
+&lt;p&gt;ES6使用 import 关键字引入模块，通过 exprot 关键字导出模块使用模块化：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//方法一：导出需要的数据
+var arr=[]
+var str=&#39;haha&#39;
+export {
+	arr,str
+}
+import {arr,str} from &#39;./info.js&#39;
+//方法二：让导入者自己命名
+export default function (){
+	console.log(&amp;quot;ooooo&amp;quot;)
+}
+import myFunc from &#39;./info.js&#39;
+//方法三：定义时直接导出
+export var num = 100
+export function mul(num1,num2){
+    return num1+num2
+}
+//导入全部模块
+import * as aaa from &#39;./info.js&#39;
+console.log(aaa.属性)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+            </item><item>
+                <title>JQuery基本操作</title>
+                <link>https://example.com/2019/10/jquery%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</link>
+                <pubDate>Wed, 02 Oct 2019 13:20:09 +0800</pubDate><guid>https://example.com/2019/10/jquery%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</guid>
+                <description>
+
+&lt;h1 id=&#34;jquery-获取元素&#34;&gt;jQuery 获取元素&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;$(document) //选择整个文档对象
+$(&#39;#myId&#39;) //选择ID为myId的网页元素
+$(&#39;div.myClass&#39;) // 选择class为myClass的div元素 
+$(&#39;input[name=first]&#39;) // 选择name属性等于first的input元素
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;jquery-链式操作&#34;&gt;jQuery 链式操作&lt;/h1&gt;
+
+&lt;p&gt;原理:每一步的jQuery操作，返回的都是一个jQuery对象，所以不同操作可以连在一起。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;div&#39;) //找到div元素
+.find(&#39;h3&#39;) //选择其中的h3元素
+.eq(2) //选择第3个h3元素
+.html(&#39;Hello&#39;); //将它的内容改为Hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;jquery-创建元素&#34;&gt;jQuery 创建元素&lt;/h1&gt;
+
+&lt;p&gt;把新元素直接传入jQuery的构造函数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;&amp;lt;p&amp;gt;Hello&amp;lt;/p&amp;gt;&#39;);
+$(&#39;&amp;lt;li class=&amp;quot;new&amp;quot;&amp;gt;new list item&amp;lt;/li&amp;gt;&#39;);
+$(&#39;ul&#39;).append(&#39;&amp;lt;li&amp;gt;list item&amp;lt;/li&amp;gt;&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;jquery-移动元素&#34;&gt;jQuery 移动元素&lt;/h1&gt;
+
+&lt;p&gt;提供两组方法，来操作元素在网页中的位置移动。
+一组方法是直接移动该元素，另一组方法是移动其他元素，使得目标元素达到想要的位置。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//第一种方法是使用.insertAfter()，把div元素移动p元素后面：
+$(&#39;div&#39;).insertAfter($(&#39;p&#39;));
+//第二种方法是使用.after()，把p元素加到div元素前面：
+$(&#39;p&#39;).after($(&#39;div&#39;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其他4对操作方法如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;.insertAfter()和.after()：在现存元素的外部，从后面插入元素&lt;/p&gt;
+
+&lt;p&gt;.insertBefore()和.before()：在现存元素的外部，从前面插入元素&lt;/p&gt;
+
+&lt;p&gt;.appendTo()和.append()：在现存元素的内部，从后面插入元素&lt;/p&gt;
+
+&lt;p&gt;.prependTo()和.prepend()：在现存元素的内部，从前面插入元素&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;jquery-修改元素的属性&#34;&gt;jQuery 修改元素的属性&lt;/h1&gt;
+
+&lt;p&gt;使用同一个函数，来完成取值（getter）和赋值（setter）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&#39;h1&#39;).html(); //html()没有参数，表示取出h1的值
+$(&#39;h1&#39;).html(&#39;Hello&#39;); //html()有参数Hello，表示对h1进行赋值
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;常见取值和赋值&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.html() 取出或设置html内容
+.text() 取出或设置text内容
+.attr() 取出或设置某个属性的值
+.width() 取出或设置某个元素的宽度
+.height() 取出或设置某个元素的高度
+.val() 取出某个表单元素的值
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;删除元素使用.remove()和.detach()。&lt;/p&gt;
+
+&lt;p&gt;两者的区别在于，前者不保留被删除元素的事件，后者保留，有利于重新插入文档时使用。&lt;/p&gt;
+</description>
+            </item><item>
+                <title>JS对象基本用法</title>
+                <link>https://example.com/2019/09/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+                <pubDate>Sun, 22 Sep 2019 20:10:09 +0800</pubDate><guid>https://example.com/2019/09/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+                <description>
+
+&lt;h3 id=&#34;对象基础&#34;&gt;对象基础&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;定义：&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;无序&lt;/span&gt;数据集合&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;键值对&lt;/span&gt;的集合&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;写法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let obj={&#39;name&#39;:&#39;lemom&#39;, &#39;age&#39;:18}
+let obj = new Object({&#39;name&#39;:&#39;lemom&#39;
+})
+cosole.log({&#39;name&#39;:&#39;lemom&#39;, &#39;age&#39;:18})
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;细节&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;键名是字符串&lt;/span&gt;，不是标识符，可包含任意字符&lt;/p&gt;
+
+&lt;p&gt;引号可省略，省略后只能写标识符（引号省略了键名依然是字符串）&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;Object.keys(obj)可以得到obj的所有key&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;变量作属性名&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let p1 = &#39;name&#39;
+let obj={p1 : &#39;lemom&#39;} //属性名为&#39;p1&#39;
+let obj={[p1] : &#39;lemom&#39;} //属性名为&#39;name&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对比：不加 [ ] 的属性会自动变成字符串；加了[ ]则会当做变量求值，值不是字符串会自动变成字符串&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;对象的隐藏属性&#34;&gt;对象的隐藏属性&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;JS中每个对象都有一个隐藏属性，存储着共有属性组成的对象的二地址&lt;/p&gt;
+
+&lt;p&gt;，这个组成的对象就叫做&lt;span style=&#39;color:red&#39;&gt;原型&lt;/span&gt;，也就是说隐藏属性存着原型的地址&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;示例&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var obj={}
+obj.toString()
+//因为 obj的隐藏属性对应的对象上有toString()，所以该方法不会报错
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;对象的增删改查&#34;&gt;对象的增删改查&lt;/h3&gt;
+
+&lt;h4 id=&#34;删除属性&#34;&gt;删除属性&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;delete obj.xxx 或 delete obj[&amp;lsquo;xxx&amp;rsquo;]&lt;/p&gt;
+
+&lt;p&gt;区别：obj.xxx=undefined，此时只是删除属性值，&lt;span style=&#39;color:red&#39;&gt;delete则是删除属性名和属性值&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;判断属性名是否在对象中（不区分自身与共有属性）&lt;/p&gt;
+
+&lt;p&gt;&amp;lsquo;xxx&amp;rsquo; in obj  返回boolean&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;不能用 obj.xxx===undefined 来判断属性名是否存在，应该用（ &lt;span style=&#39;color:red&#39;&gt;&amp;lsquo;xxx&amp;rsquo; in obj &amp;amp;&amp;amp; obj.xxx===undefined&lt;/span&gt; ）&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;查看所有属性&#34;&gt;查看所有属性&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看自身所有属性&lt;/p&gt;
+
+&lt;p&gt;Object.keys(obj)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;查看自身 和 共有属性&lt;/p&gt;
+
+&lt;p&gt;console.dir(obj)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;判断一个属性是否是自身属性&lt;/p&gt;
+
+&lt;p&gt;obj.hasOwnProperty(&amp;lsquo;toString&amp;rsquo;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;两种方法查看属性值：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;中括号：obj[&amp;lsquo;key&amp;rsquo;]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;点语法：obj.key&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;注意：obj[key]  key在此处为变量，表示的是字符串&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;obj.name !== obj[name]&lt;/p&gt;
+
+&lt;p&gt;obj.name === obj[&amp;lsquo;name&amp;rsquo;]&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;原型&#34;&gt;原型&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;每个对象都有原型，原型里存着对象的共有属性&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#39;color:red&#39;&gt;obj.__ proto __&lt;/span&gt;存着这个原型对象的地址&lt;/li&gt;
+&lt;li&gt;对象的原型也是对象，所以原型也有原型，包含着所有对象的共有属性，是&lt;span style=&#39;color:red&#39;&gt;对象的根&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;原型的原型是 &lt;span style=&#39;color:red&#39;&gt;null&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;修改或增加属性&#34;&gt;修改或增加属性&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;直接赋值&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let obj={name:&#39;lemom&#39;}
+obj.name=&#39;lemom2&#39;
+obj[&#39;name&#39;]=&#39;lemom22&#39;
+obj[&#39;na&#39;+&#39;me&#39;]=&#39;lemom222&#39;
+let key = &#39;name&#39;
+obj[key] = &#39;lemom223&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;批量赋值&lt;/p&gt;
+
+&lt;p&gt;Object.assign(obj,{age:18, gender:&amp;lsquo;male&amp;rsquo;})&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;无法通过自身属性&lt;span style=&#39;color:red&#39;&gt;修改原型属性&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;如：obj.toString = &amp;lsquo;xxx&amp;rsquo; 只是修改自身属性，不会影响原型上的属性。&lt;/p&gt;
+
+&lt;p&gt;但可以通过以下方式修改或增加原型属性：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;obj.__proto.toString=&#39;xxx&#39; //但不推荐这种方式
+Object.prototype.toString=&#39;xxx&#39; //推荐此方式
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;span style=&#39;color:red&#39;&gt;一般不要修改原型&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;修改隐藏属性（原型）( __ proto __)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let obj = {name:&#39;lemom&#39;}
+let common ={kind:&#39;human&#39;}
+obj.__proto__ = common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;推荐使用 Object.create() 方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let common ={kind:&#39;human&#39;}
+let obj = Object.create(common)
+obj.name=&#39;lemom&#39;
+//先修改原型，再添加自身属性
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+            </item><item>
+                <title>安装node后npm报错</title>
+                <link>https://example.com/2019/09/%E5%AE%89%E8%A3%85node%E5%90%8Enpm%E6%8A%A5%E9%94%99/</link>
+                <pubDate>Wed, 18 Sep 2019 13:11:09 +0800</pubDate><guid>https://example.com/2019/09/%E5%AE%89%E8%A3%85node%E5%90%8Enpm%E6%8A%A5%E9%94%99/</guid>
+                <description>
+
+&lt;h1 id=&#34;npm-install-报错-npm-err-errno-4048-error-eperm-operation-not-permitted&#34;&gt;npm install 报错（npm ERR! errno -4048，Error: EPERM: operation not permitted&amp;hellip;）&lt;/h1&gt;
+
+&lt;p&gt;解决方法:
+* 方法一：清理下缓存就行，不用管理员权限。
+删除npmrc文件。
+&amp;gt; 不是nodejs安装目录npm模块下的那个npmrc文件。而是在 C:\Users{账户}\下的.npmrc文件
+* 方法二：直接用命令清理就行，控制台输入：
+npm cache clean &amp;ndash;force&lt;/p&gt;
+</description>
+            </item><item>
+                <title>JS基本语法</title>
+                <link>https://example.com/2019/09/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+                <pubDate>Tue, 10 Sep 2019 12:11:09 +0800</pubDate><guid>https://example.com/2019/09/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+                <description>
+
+&lt;h1 id=&#34;表达式和语句&#34;&gt;表达式和语句&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;二者的区别：表达式一般都有值，语句可能有也可能没有；
+语句一般会改变环境（声明，赋值）；
+* 表达式：
+1+2表达式值为3;&lt;br&gt;
+add(1,2)表达式的值是add函数的返回值（&lt;strong&gt;只有函数才有返回值&lt;/strong&gt;）;&lt;br&gt;
+console.log的值是函数本身;&lt;br&gt;
+console.log(3)表达式的值为undefined，因为函数的返回值是undefined;&lt;br&gt;
+* 语句：
+var a=1表示一个语句&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-!&#34;&gt;大小写敏感：
+var a和var A是不同的；
+object和Object是不同的；
+function和Function是不同的; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;标识符的规则&#34;&gt;标识符的规则&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;规则：
+
+&lt;ol&gt;
+&lt;li&gt;第一个字符可以是Unicode字母或$或_或中文&lt;/li&gt;
+&lt;li&gt;后面的字符，除了上面的还可以是数字&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;变量名(举例)：
+
+&lt;ul&gt;
+&lt;li&gt;var _ = 1&lt;/li&gt;
+&lt;li&gt;var $ = 2&lt;/li&gt;
+&lt;li&gt;var ______ = 6&lt;/li&gt;
+&lt;li&gt;var 你好 = &amp;lsquo;hi&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;if-else-语句&#34;&gt;if-else 语句&lt;/h1&gt;
+
+&lt;h2 id=&#34;if语句&#34;&gt;if语句:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;语法:
+if(表达式){语句1}else{语句2}；&lt;br&gt;
+{}在语句只有一句的时候可省略，但不建议这样做&lt;br&gt;
+一道面试题：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;a=1
+if (a === 2)
+    console.log(&#39;a&#39;)
+    console.log(&#39;a等于2&#39;)
+        
+    //结果为a等于2，因为省略{}的时候，只对离{}最近的一句语句有效果
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;最推荐使用的写法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;if(表达式){
+语句
+}else if(表达式){
+语句
+}else{
+语句
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;只有一个判断值的时候可以用问号冒号表达式：&lt;br&gt;
+表达式1？表达式2：表达式3&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;while语句&#34;&gt;while语句&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;语法:&lt;br&gt;
+while(表达式){语句}&lt;br&gt;
+判断表达式的真假&lt;br&gt;
+当表达式为真，执行语句，执行完再判断表达式的真假&lt;br&gt;
+当表达式为假，执行后面的语句&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;for-语句&#34;&gt;for 语句&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;for可以看作是whlie循环的方便写法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;for(语句1;表达式2;语句3){
+循环体
+}
+/*
+1.先执行语句1
+2.然后判断表达式2
+3.如果为真，执行循环体，然后执行语句3
+4.如果为假，直接退出循环，执行后面的语句
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;break与continue&#34;&gt;break与continue&lt;/h1&gt;
+
+&lt;p&gt;区别：&lt;br&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;前者是退出所有循环&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;后者退出当前的一次循环&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;label&#34;&gt;label&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;语法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;foo:{
+console.log(1);
+break foo;
+console.log(&#39;该处不执行&#39;)
+}
+console.log(2)
+//执行结果为1,2
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;表示的是一个标记语句&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;面试相关&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
+foo:1
+}
+//上面是对象吗
+//否，返回的是一个label，值为1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+            </item><item>
+                <title>探索JavaScript的发展</title>
+                <link>https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/</link>
+                <pubDate>Sat, 07 Sep 2019 19:11:09 +0800</pubDate><guid>https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/</guid>
+                <description>
+
+&lt;h1 id=&#34;1-javascript概念&#34;&gt;1.JavaScript概念&lt;/h1&gt;
+
+&lt;p&gt;JavaScript（通常缩写为JS）是一种&lt;font color=&#34;red&#34;&gt;高级的、解释型&lt;/font&gt;的编程语言。JavaScript是一门基于原型、函数先行的语言，是一门多范式的语言，它支持&lt;font color=&#34;red&#34;&gt;面向对象编程，命令式编程，以及函数式编程&lt;/font&gt;。它提供语法来操控文本、数组、日期以及正则表达式等，不支持I/O，比如网络、存储和图形等，但这些都可以由它的宿主环境提供支持。它已经由ECMA（欧洲计算机制造商协会）通过ECMAScript实现语言的标准化。它被世界上的绝大多数网站所使用，也被世界主流浏览器（Chrome、IE、Firefox、Safari、Opera）支持。                              ——&lt;strong&gt;摘自维基百科&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;2-javascript的诞生&#34;&gt;2.JavaScript的诞生&lt;/h1&gt;
+
+&lt;p&gt;首先需要了解它的历史背景：
+&amp;gt; 1994年，网景公司（Netscape）发布了Navigator浏览器0.9版。这是历史上第一个比较成熟的网络浏览器，轰动一时。但是，这个版本的浏览器只能用来浏览，不具备与访问者互动的能力。网景公司急需一种网页脚本语言，&lt;strong&gt;使得浏览器可以与网页互动&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;在网景公司和SUN公司联合共同推行一种叫“JAVA+script”脚本语言的时候，一位名叫&lt;font color=&#34;red&#34;&gt;Brendan Eich&lt;/font&gt;的程序员登场了，也就是中文说的JavaScript之父布兰登。1995年4月，网景公司录用了他。&lt;/p&gt;
+
+&lt;p&gt;网景公司招聘他的目的，是研究将Scheme语言作为网页脚本语言的可能性。而Brendan Eich的主要方向和兴趣是函数式编程，Brendan Eich本人也是这样想的，以为进入新公司后，会主要与Scheme语言打交道。&lt;/p&gt;
+
+&lt;p&gt;1995年5月，网景公司做出了决策，&lt;strong&gt;未来的网页脚本语言必须&amp;rdquo;看上去与Java足够相似&amp;rdquo;，但是比Java简单，使得非专业的网页作者也能很快上手。&lt;/strong&gt;
+然而Brendan Eich对Java并没有任何兴趣，为了应付公司安排的工作，只用10天时间就把JavaScript设计出来了。&lt;/p&gt;
+
+&lt;p&gt;当时他的设计思路如下：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;借鉴C语言的基本语法；&lt;/li&gt;
+&lt;li&gt;借鉴Java语言的数据类型和内存管理；&lt;/li&gt;
+&lt;li&gt;借鉴Scheme语言，将函数提升到&amp;rdquo;第一等公民&amp;rdquo;（first class）的地位；&lt;/li&gt;
+&lt;li&gt;借鉴Self语言，使用基于原型（prototype）的继承机制。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;由此可见，JavaScript语言实际上是两种语言风格的混合产物：（简化的）函数式编程+（简化的）面向对象编程。这是由Brendan Eich（函数式编程）与网景公司（面向对象编程）共同决定的。&lt;/p&gt;
+
+&lt;h1 id=&#34;3-javascript的缺陷&#34;&gt;3.JavaScript的缺陷&lt;/h1&gt;
+
+&lt;p&gt;由于该脚本的设计原由，想必也会出现一些缺陷，造成缺陷的客观原因主要有三方面：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. 设计阶段过于仓促&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. 没有先例可参考&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. 过早的标准化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;下面参考阮一峰总结的10个方面的缺陷，如有兴趣详细了解请参考末尾的地址：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;不适合开发大型程序：很难模块化，也不利于模块化加载。&lt;/li&gt;
+&lt;li&gt;非常小的标准库：JavaScript提供的标准函数库非常小，只能完成一些基本操作，很多功能都不具备。&lt;/li&gt;
+&lt;li&gt;null和undefined：两者非常容易混淆，但是含义完全不同。&lt;/li&gt;
+&lt;li&gt;全局变量难以控制：JavaScript的全局变量，在所有模块中都是可见的；任何一个函数内部都可以生成全局变量，这大大加剧了程序的复杂性。&lt;/li&gt;
+&lt;li&gt;Javascript的所有语句，都必须以分号结尾。&lt;/li&gt;
+&lt;li&gt;加号运算符&lt;/li&gt;
+&lt;li&gt;NaN：NaN是一种数字，表示超出了解释器的极限。&lt;/li&gt;
+&lt;li&gt;数组和对象的区分：由于JavaScript的数组也属于对象（Object），所以要区分一个对象到底是不是数组，相当麻烦。&lt;/li&gt;
+&lt;li&gt;== 和 ===&lt;/li&gt;
+&lt;li&gt;基本类型的包装对象&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;看上去JavaScript还有很多缺陷，但随着互联网的发展，语言标准的改进，几乎所有网页都离不开它，绝大部分使用者都在用它开发各种新项目，所以前途还是一片光明&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;参考资料&lt;/font&gt;
+* &lt;a href=&#34;https://user-gold-cdn.xitu.io/2019/9/7/16d0c6f16412b5fa&#34;&gt;Javascript诞生记&lt;/a&gt;
+* &lt;a href=&#34;http://www.ruanyifeng.com/blog/2011/06/10_design_defects_in_javascript.html&#34;&gt;Javascript的10个设计缺陷&lt;/a&gt;&lt;/p&gt;
+</description>
+            </item><item>
+                <title>浅析URL</title>
+                <link>https://example.com/2019/09/%E6%B5%85%E6%9E%90url/</link>
+                <pubDate>Sat, 07 Sep 2019 12:11:09 +0800</pubDate><guid>https://example.com/2019/09/%E6%B5%85%E6%9E%90url/</guid>
+                <description>
+
+&lt;h1 id=&#34;url的定义&#34;&gt;URL的定义&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;统一资源标识符（英语：Uniform Resource Identifier，缩写：URI）在计算机术语中是一个用于标识某一互联网资源名称的字符串。
+该种标识允许用户对网络中（一般指万维网）的资源通过特定的协议进行交互操作。URI的最常见的形式是统一资源定位符（URL），经常指定为非正式的网址。更罕见的用法是统一资源名称（URN），其目的是通过提供一种途径。用于在特定的名字空间资源的标识，以补充网址。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;url组成部分&#34;&gt;URL组成部分&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;URL = 协议+域名或IP+端口号+路径+查询字符串+锚点&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;协议：常用的为HTTP(80端口)或HTTPS(443端口)：提供网页访问的服务协议&lt;/li&gt;
+&lt;li&gt;域名(IP)：类似于 qq.com，其实是对IP的别称。
+一个域名可以对应不同IP，这也叫做负载均衡，减轻一台机器的压力；
+一个IP也可以对应不同的域名，这叫共享主机，一般不这样；而域名和IP是通过DNS对应起来的
+
+&lt;ul&gt;
+&lt;li&gt;域名的分类：&lt;/li&gt;
+&lt;li&gt;顶级域名：com&lt;/li&gt;
+&lt;li&gt;二级域名：baidu.com&lt;/li&gt;
+&lt;li&gt;三级域名：www.baidu.com&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;端口号：指明了一台服务器上的服务程序的号码&lt;/li&gt;
+&lt;li&gt;路径：主要是指明要访问的页面&lt;/li&gt;
+&lt;li&gt;查询字符串：主要是在同一个页面访问返回的不同的内容&lt;/li&gt;
+&lt;li&gt;锚点：主要访问同一个页面中的不同位置，该锚点信息不会发送到服务器，实际上也不支持中文&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;dns-的作用&#34;&gt;DNS 的作用&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;DNS （Domain Name System 的缩写）的作用非常简单，就是根据域名查出IP地址。你可以把它想象成一本巨大的电话本。举例来说，如果你要访问域名
+math.stackexchange.com，首先要通过DNS查询它的IP地址是151.101.129.69
+&amp;ndash;摘自阮一峰的解释&lt;/p&gt;
+
+&lt;h1 id=&#34;nslookup-命令怎么用&#34;&gt;nslookup 命令怎么用&lt;/h1&gt;
+
+&lt;p&gt;作用：查询DNS的记录，查看域名解析是否正常，在网络故障的时候用来诊断网络问题。
+使用方法如图：
+&lt;img src=&#34;https://example.com/nslookup.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+            </item><item>
+                <title>CSS 知识总结</title>
+                <link>https://example.com/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</link>
+                <pubDate>Sat, 07 Sep 2019 11:00:09 +0800</pubDate><guid>https://example.com/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</guid>
+                <description>
+
+&lt;h1 id=&#34;css发明&#34;&gt;CSS发明&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;CSS首先由赖先生（Hakon Wium Lie）提出&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;css的牛x之处&#34;&gt;CSS的牛X之处&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;层叠样式表
+
+&lt;ol&gt;
+&lt;li&gt;样式层叠：可以多次对用已选择器进行样式声明&lt;/li&gt;
+&lt;li&gt;选择器层叠：可以用不同选择器对同一个元素进行样式声明&lt;/li&gt;
+&lt;li&gt;文件层叠：可以用多个文件进行层叠&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;重要版本
+
+&lt;ol&gt;
+&lt;li&gt;CSS2.1(2004~2011年)使用最广泛的版本(IE支持)&lt;/li&gt;
+&lt;li&gt;CSS3(1999年开始起草)现代版本，分模块(IE8部分支持)
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;支持的浏览器以及特性可去caniuse.com&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;css语法&#34;&gt;CSS语法&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;/*语法一：*/
+选择器{
+    属性名：属性值;
+}
+
+/*语法二：at语法*/
+@charset &amp;quot;UTF-8&amp;quot;;
+@import url(2.css);
+@media (min-width:100px) and (max-width:200px){
+    语法一
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;重要概念&#34;&gt;重要概念&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;文档流Normal Flow&lt;/li&gt;
+&lt;li&gt;块，内联，内联块&lt;/li&gt;
+&lt;li&gt;margin合并&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;两种盒模型(border-box,content-box)&lt;/p&gt;
+
+&lt;h1 id=&#34;浏览器渲染原理&#34;&gt;浏览器渲染原理&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;步骤&lt;/strong&gt;：&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;根据HTML构建HTML树&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;根据CSS构建CSS树&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;将两颗树合并成一颗渲染树&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Layout布局(文档流，盒模型，计算大小和位置)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Paint绘制(把边框颜色，文字颜色，阴影等画出来)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compose合成(根据层叠关系展示画面)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;css动画的两种做法&#34;&gt;CSS动画的两种做法&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;transition(过渡)
+&amp;gt; 一般配合transform(变形)使用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;作用：补充中间帧&lt;/p&gt;
+
+&lt;p&gt;语法：transition:属性名 时长 过渡方式 延迟
+(left 200ms linear)&lt;/p&gt;
+
+&lt;p&gt;可以用逗号分隔两个不同属性，如(transition:left 200ms,top 400ms)，可以用all代替所有属性，如(transition:all 200ms)
+2. animation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;缩写语法：时长|过渡方式|延迟|次数|方向|填充模式|是否暂停|动画名;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.eye{
+    animation: 4s linear 0s infinite alternate move_eye;
+}
+@keyframes move_eye { from { margin-left: -20%; } to { margin-left: 100%; }  }
+
+/*@keyframes还可以是百分数*/
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+            </item><item>
+                <title>HTML入门笔记1</title>
+                <link>https://example.com/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</link>
+                <pubDate>Fri, 06 Sep 2019 19:11:09 +0800</pubDate><guid>https://example.com/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</guid>
+                <description>
+
+&lt;h2 id=&#34;html之父&#34;&gt;HTML之父&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;1990年左右诞生&lt;/li&gt;
+&lt;li&gt;李爵士（Tim Berners-Lee）发明了WWW，同时发明了HTML，HTTP，URL&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;目的是网上冲浪&lt;/p&gt;
+
+&lt;h2 id=&#34;html起手式&#34;&gt;HTML起手式&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;	&amp;lt;!--文档类型 --&amp;gt;
+&amp;lt;html lang=&amp;quot;zh-CN&amp;quot;&amp;gt;&amp;lt;!--可以把lang改成en --&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;&amp;lt;!--文件的字符编码啊 --&amp;gt;
+&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no&amp;quot;&amp;gt;&amp;lt;!--禁用缩放，兼容手机--&amp;gt;
+&amp;lt;meta http-equiv=&amp;quot;X-UA-Compatible&amp;quot; content=&amp;quot;ie=edge&amp;quot;&amp;gt;&amp;lt;!--告诉IE使用最新内核 --&amp;gt;
+&amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt;&amp;lt;!--标题 --&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;常用的表章节标签&#34;&gt;常用的表章节标签&lt;/h2&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;h1~h6：表示标题，从大到小&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;section:用来表示章节&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;article：用来表示文章&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;p：用来表示段落&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;header：表示头部&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;footer：表示脚步&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;main:表示主要内容&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;aside：表示旁边内容&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;div:表示划分&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;全局属性-所有元素都有的属性&#34;&gt;全局属性(所有元素都有的属性)&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;class&lt;/li&gt;
+&lt;li&gt;contenteditable:可以使任何一个元素可编辑&lt;/li&gt;
+&lt;li&gt;hidden：隐藏元素&lt;/li&gt;
+&lt;li&gt;id：尽量不使用，因为有重复id不报错；可以直接用id.style.border=&amp;lsquo;xxx&amp;rsquo;修改样式&lt;/li&gt;
+&lt;li&gt;style&lt;/li&gt;
+&lt;li&gt;tabindex：控制tab键选中的顺序(从小到大的顺序，0表示最后，-1表示不选)&lt;/li&gt;
+&lt;li&gt;title：显示完整的内容&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;常用的内容标签&#34;&gt;常用的内容标签&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ol+li(ordered list+list item)&lt;/li&gt;
+&lt;li&gt;ul+li(unordered list+list item)&lt;/li&gt;
+&lt;li&gt;dl+dt+dd&lt;/li&gt;
+&lt;li&gt;pre(preview的缩写)&lt;/li&gt;
+&lt;li&gt;hr&lt;/li&gt;
+&lt;li&gt;br(break的缩写)&lt;/li&gt;
+&lt;li&gt;a(anchor的缩写)&lt;/li&gt;
+&lt;li&gt;em(emphasis的缩写)&lt;/li&gt;
+&lt;li&gt;strong&lt;/li&gt;
+&lt;li&gt;code&lt;/li&gt;
+&lt;li&gt;q(quote的缩写)&lt;/li&gt;
+&lt;li&gt;blockquote&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+            </item><item>
+                <title>HTML常用标签</title>
+                <link>https://example.com/2019/09/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</link>
+                <pubDate>Tue, 03 Sep 2019 19:11:09 +0800</pubDate><guid>https://example.com/2019/09/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</guid>
+                <description>
+
+&lt;h3 id=&#34;a标签&#34;&gt;a标签&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;属性&lt;/p&gt;
+
+&lt;p&gt;href：&lt;/p&gt;
+
+&lt;p&gt;​    值为网址：//google.com&lt;/p&gt;
+
+&lt;p&gt;​   值为路径：/a/b/c或a/b/c或index.html或./index.html&lt;/p&gt;
+
+&lt;p&gt;​   值为伪协议：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;javascript:xxx;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;mailto:邮箱&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;tel:手机号&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;值为id:&lt;/p&gt;
+
+&lt;p&gt;跳转到指定id为xxx的元素部分:href=#xxx&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;target：指定在哪个窗口打开&lt;/p&gt;
+
+&lt;p&gt;download：大部分不支持&lt;/p&gt;
+
+&lt;p&gt;rel=noopener：为了防止一个BUG&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;作用&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;跳转外部页面&lt;/li&gt;
+&lt;li&gt;跳转内部锚点&lt;/li&gt;
+&lt;li&gt;跳转到邮箱或电话等&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;img标签&#34;&gt;img标签&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;作用：发出get请求，展示一张图片&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;重要属性：&lt;/p&gt;
+
+&lt;p&gt;alt : 加载图片失败的提示&lt;/p&gt;
+
+&lt;p&gt;height / width / src&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;事件：&lt;/p&gt;
+
+&lt;p&gt;onload : 图片加载成功时会调用&lt;/p&gt;
+
+&lt;p&gt;onerror : 图片加载失败时会调用，作用是可替换一张正常的图片代替加载失败的情况&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;响应式：&lt;/p&gt;
+
+&lt;p&gt;max-width : 100%&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;table标签&#34;&gt;table标签&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;主要包含三部分：thead , tbody , tfooter&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;三部分中分别可以用 tr 和 td 写内容&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;默认的table样式会比较丑，所以一般设置两个属性：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;border-collapse:collapse; //合并表格
+border-spacing: 0; //不需要空隙
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;#### 小记：书山有路勤为径，学海无涯苦作舟&lt;/p&gt;
+</description>
+            </item><item>
+                <title>如何使用 GitHub Pages 预览 HTML</title>
+                <link>https://example.com/2019/09/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-github-pages-%E9%A2%84%E8%A7%88-html/</link>
+                <pubDate>Sun, 01 Sep 2019 19:11:09 +0800</pubDate><guid>https://example.com/2019/09/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-github-pages-%E9%A2%84%E8%A7%88-html/</guid>
+                <description>&lt;ol&gt;
+&lt;li&gt;上传项目到github(略)&lt;/li&gt;
+&lt;li&gt;打开项目，选择Settings
+如图：
+&lt;img src=&#34;https://example.com/步骤1.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;下滑至此位置，选择master分支:&lt;img src=&#34;https://example.com/选择master.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;选好后直接打开给出的连接(绿色处):&lt;img src=&#34;https://example.com/打开链接.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;然后在链接后加上想要预览的HTML文件名即可：
+&lt;img src=&#34;https://example.com/预览HTML.png&#34; alt=&#34;&#34; /&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+            </item><item>
+                <title>Markdown 基本语法预览</title>
+                <link>https://example.com/2019/08/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+                <pubDate>Sun, 25 Aug 2019 16:22:42 +0800</pubDate><guid>https://example.com/2019/08/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+                <description>&lt;p&gt;这是一篇用于预览 :(fab fa-markdown): Markdown 基本语法的文章。&lt;/p&gt;
+
+&lt;p&gt;文章内容基于 &lt;a href=&#34;https://github.github.com/gfm&#34;&gt;GitHub Flavored Markdown Spec&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;不包含复杂的规则说明，仅仅展示 GFM 所约定的 Markdown 基本语法。&lt;/p&gt;
+
+&lt;h2 id=&#34;1-引言&#34;&gt;1 引言&lt;/h2&gt;
+
+&lt;p&gt;:(fab fa-markdown): &lt;strong&gt;Markdown&lt;/strong&gt; 是一种用于编写结构化文档的纯文本格式。它基于电子邮件和论坛文章的格式所约定。
+它由 John Gruber (在 Aaron Swartz 的帮助下)开发，于 2004 年以语法描述和用于将 Markdown 转换为 HTML 的 Perl 脚本 (Markdown.pl) 的形式发布。&lt;/p&gt;
+
+&lt;p&gt;在接下来的十年中，许多实现被开发出来。一些用脚注、表和其他文档元素的约定扩展了原始 Markdown 语法。
+有些允许 Markdown 文档以 HTML 以外的格式呈现。 像 reddit，StackOverflow 和 GitHub 这样的网站有上百万的用户在使用 Markdown。
+Markdown 开始被应用于网络以外的领域，包括作者书籍、文章、幻灯片、信件和课堂笔记。&lt;/p&gt;
+
+&lt;h2 id=&#34;2-块和内联元素&#34;&gt;2 块和内联元素&lt;/h2&gt;
+
+&lt;p&gt;我们可以把一个文档看成一系列的块，如段落、引用、列表、标题和代码块。&lt;/p&gt;
+
+&lt;p&gt;有些块(如引号和列表)可以包含其它的块，即 &lt;strong&gt;容器块&lt;/strong&gt;；
+其他的块(如标题和段落)则包含内联元素(如文本、链接、强调、图像、内联代码等)，即 &lt;strong&gt;叶子块&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;块的符号总是优先于内联元素的符号。例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;- `one
+- two`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;`one&lt;/li&gt;
+&lt;li&gt;two`&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;3-叶子块&#34;&gt;3 叶子块&lt;/h2&gt;
+
+&lt;p&gt;本节描述用于组成 Markdown 文档的不同类型的叶子块。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-1-换行符&#34;&gt;3.1 换行符&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;***
+------
+  ____
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;3-2-标题&#34;&gt;3.2 标题&lt;/h3&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-pencil-alt&#34;&gt;&lt;/i&gt;关于 ATX 风格标题和 Setext 风格标题&lt;/p&gt;&lt;p&gt;本文只展示 ATX 风格标题，关于 Setext 风格标题的介绍请参考 &lt;a href=&#34;https://github.github.com/gfm/#setext-heading&#34;&gt;GFM Setext headings 说明&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;笔者不推荐在 Hugo 的 Markdown 文档中使用 Setext 风格标题。&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;## H2 二级标题
+### H3 三级标题
+#### H4 四级标题
+##### H5 五级标题
+###### H6 六级标题
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;h2-二级标题&#34;&gt;H2 二级标题&lt;/h2&gt;
+
+&lt;h3 id=&#34;h3-三级标题&#34;&gt;H3 三级标题&lt;/h3&gt;
+
+&lt;h4 id=&#34;h4-四级标题&#34;&gt;H4 四级标题&lt;/h4&gt;
+
+&lt;h5 id=&#34;h5-五级标题&#34;&gt;H5 五级标题&lt;/h5&gt;
+
+&lt;h6 id=&#34;h6-六级标题&#34;&gt;H6 六级标题&lt;/h6&gt;
+
+&lt;h3 id=&#34;3-3-代码块&#34;&gt;3.3 代码块&lt;/h3&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-pencil-alt&#34;&gt;&lt;/i&gt;关于缩进式代码块和围栏式代码块&lt;/p&gt;&lt;p&gt;本文只展示围栏式代码块，关于缩进式代码块的介绍请参考 &lt;a href=&#34;https://github.github.com/gfm/#indented-code-block&#34;&gt;GFM Indented code blocks 说明&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;笔者不推荐在 Hugo 的 Markdown 文档中使用缩进式代码块。&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;```
+foo()
+```
+
+~~~
+foo()
+~~~
+
+````
+foo()
+````
+
+```ruby
+def foo(x)
+  return 3
+end
+```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;foo()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;foo()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;foo()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;def foo(x)
+  return 3
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;
+&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, 世界&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;span style=&#34;display:block;width:100%;background-color:#3c3d38&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;3-4-段落&#34;&gt;3.4 段落&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;这是一个段落。
+这还是之前段落的一部分。
+
+这是新的段落。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这是一个段落。
+这还是之前段落的一部分。&lt;/p&gt;
+
+&lt;p&gt;这是新的段落。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-5-引用链接的定义&#34;&gt;3.5 引用链接的定义&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;[foo]: /url &amp;quot;title&amp;quot;
+
+[foo]
+
+[bar]: /url
+
+[bar]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://example.com/url&#34; title=&#34;title&#34;&gt;foo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://example.com/url&#34;&gt;bar&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-6-空白行&#34;&gt;3.6 空白行&lt;/h3&gt;
+
+&lt;p&gt;块之间的空白行将被忽略，除了它们在确定列表是紧还是松时所起的作用。&lt;/p&gt;
+
+&lt;p&gt;文档开头和结尾的空行也会被忽略。&lt;/p&gt;
+
+&lt;h2 id=&#34;4-容器块&#34;&gt;4 容器块&lt;/h2&gt;
+
+&lt;h3 id=&#34;4-1-引用&#34;&gt;4.1 引用&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;&amp;gt; Foo
+&amp;gt;
+&amp;gt; - **bar**
+&amp;gt; - baz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Foo&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;bar&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;baz&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;4-2-无序列表&#34;&gt;4.2 无序列表&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;- 项目 1
+    * 项目 A
+    - 项目 B
+        一些说明
+        + 项目 a
+        * 项目 b
+        - 项目 c
+    + 项目 C
++ 项目 2
+* 项目 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;项目 1
+
+&lt;ul&gt;
+&lt;li&gt;项目 A&lt;/li&gt;
+&lt;li&gt;项目 B
+一些说明
+
+&lt;ul&gt;
+&lt;li&gt;项目 a&lt;/li&gt;
+&lt;li&gt;项目 b&lt;/li&gt;
+&lt;li&gt;项目 c&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;项目 C&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;项目 2&lt;/li&gt;
+&lt;li&gt;项目 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;4-3-有序列表&#34;&gt;4.3 有序列表&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;1. 项目 1
+    1. 项目 A
+    2. 项目 B
+        一些说明
+        1. 项目 a
+        2. 项目 b
+        3. 项目 c
+    3. 项目 C
+2. 项目 2
+3. 项目 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;项目 1
+
+&lt;ol&gt;
+&lt;li&gt;项目 A&lt;/li&gt;
+&lt;li&gt;项目 B
+一些说明
+
+&lt;ol&gt;
+&lt;li&gt;项目 a&lt;/li&gt;
+&lt;li&gt;项目 b&lt;/li&gt;
+&lt;li&gt;项目 c&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;项目 C&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;项目 2&lt;/li&gt;
+&lt;li&gt;项目 3&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;4-4-任务列表&#34;&gt;4.4 任务列表&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;- [ ] 任务 1
+    * [X] 任务 A
+    - 任务 B
+        + [ ] 任务 a
+        * [ ] 任务 b
+        - [X] 任务 c
+    + [X] 任务 C
++ [ ] 任务 2
+* [X] 任务 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; 任务 1
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; 任务 A&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;任务 B
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; 任务 a&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; 任务 b&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; 任务 c&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; 任务 C&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; 任务 2&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; 任务 3&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;4-5-表格&#34;&gt;4.5 表格&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;| _颜色_      | 水果          | 蔬菜         |
+| ----------  |:---------------:| -----------:|
+| 红色           | *苹果*         | 辣椒      |
+| ~~橙色~~    | 橘子         | **胡萝卜**        |
+| 绿色         | ~~***梨子***~~ | 菠菜           |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;em&gt;颜色&lt;/em&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;水果&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;蔬菜&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;红色&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;em&gt;苹果&lt;/em&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;辣椒&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;橙色&lt;/del&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;橘子&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;&lt;strong&gt;胡萝卜&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;绿色&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;del&gt;&lt;strong&gt;&lt;em&gt;梨子&lt;/em&gt;&lt;/strong&gt;&lt;/del&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;菠菜&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;3-页内锚&#34;&gt;3. 页内锚&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;[脚注](#footnote)
+
+## 4. 脚注 {#footnote}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;#footnote&#34;&gt;脚注&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;footnote&#34;&gt;4. 脚注&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;这是一个基本的数字脚注[^1]
+
+带有 &amp;quot;label&amp;quot; 标签的脚注[^label]
+
+下定义的脚注[^!DEF]
+
+带有链接的脚注[^pa]
+
+[^1]: 这是一个基本的数字脚注
+[^label]: 带有 &amp;quot;label&amp;quot; 标签的脚注
+[^pa]: [LoveIt 主题](https://github.com/dillonzq/LoveIt)
+[^!DEF]: 下定义的脚注
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这是一个基本的数字脚注&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;带有 &amp;ldquo;label&amp;rdquo; 标签的脚注&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:label&#34;&gt;&lt;a href=&#34;#fn:label&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;下定义的脚注&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:DEF&#34;&gt;&lt;a href=&#34;#fn:DEF&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;带有链接的脚注&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:pa&#34;&gt;&lt;a href=&#34;#fn:pa&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;5-内联格式&#34;&gt;5. 内联格式&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;`内联代码块`
+
+&amp;lt;kbd&amp;gt;ctrl&amp;lt;/kbd&amp;gt;+&amp;lt;kbd&amp;gt;alt&amp;lt;/kbd&amp;gt;+&amp;lt;kbd&amp;gt;del&amp;lt;/kbd&amp;gt;
+
+**加粗 1** 和 __加粗 2__
+
+*倾斜 1*  和 _倾斜 2_
+
+~~删除线~~
+
+***加粗 1 和 倾斜 1***
+
+___加粗 2 和 倾斜 2___
+
+__*加粗 2 和 倾斜 1*__
+
+**_加粗 1 和 倾斜 2_**
+
+~~*删除线 倾斜 1*~~ 和 *~~删除线 倾斜 2~~*
+
+~~_删除线 倾斜 2_~~ 和  _~~删除线 倾斜 2~~_
+
+~~**删除线 加粗 1**~~ 和 **~~删除线 加粗 1~~**
+
+~~__删除线 加粗 2__~~ 和 __~~删除线 加粗 2~~__
+
+~~***删除线 倾斜 1 加粗 1***~~ 和 ***~~删除线 倾斜 1 加粗 1~~***
+
+~~___删除线 倾斜 2 加粗 2___~~ 和 ___~~删除线 倾斜 2 加粗 2~~___
+
+**~~*删除线 倾斜 1 加粗 1*~~** 和 *~~**删除线 倾斜 1 加粗 1**~~*
+
+__~~_删除线 倾斜 2 加粗 2_~~__ 和 _~~__删除线 倾斜 2 加粗 2__~~_
+
+**~~_删除线 倾斜 2 加粗 1_~~** 和 _~~**删除线 倾斜 2 加粗 1**~~_
+
+__~~*删除线 倾斜 1 加粗 2*~~__ 和 *~~__删除线 倾斜 1 加粗 2__~~*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;内联代码块&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;kbd&gt;ctrl&lt;/kbd&gt;+&lt;kbd&gt;alt&lt;/kbd&gt;+&lt;kbd&gt;del&lt;/kbd&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;加粗 1&lt;/strong&gt; 和 &lt;strong&gt;加粗 2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;倾斜 1&lt;/em&gt;  和 &lt;em&gt;倾斜 2&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;删除线&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;加粗 1 和 倾斜 1&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;加粗 2 和 倾斜 2&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;加粗 2 和 倾斜 1&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;加粗 1 和 倾斜 2&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;&lt;em&gt;删除线 倾斜 1&lt;/em&gt;&lt;/del&gt; 和 &lt;em&gt;&lt;del&gt;删除线 倾斜 2&lt;/del&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;&lt;em&gt;删除线 倾斜 2&lt;/em&gt;&lt;/del&gt; 和  &lt;em&gt;&lt;del&gt;删除线 倾斜 2&lt;/del&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;&lt;strong&gt;删除线 加粗 1&lt;/strong&gt;&lt;/del&gt; 和 &lt;strong&gt;&lt;del&gt;删除线 加粗 1&lt;/del&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;&lt;strong&gt;删除线 加粗 2&lt;/strong&gt;&lt;/del&gt; 和 &lt;strong&gt;&lt;del&gt;删除线 加粗 2&lt;/del&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;&lt;strong&gt;&lt;em&gt;删除线 倾斜 1 加粗 1&lt;/em&gt;&lt;/strong&gt;&lt;/del&gt; 和 &lt;strong&gt;&lt;em&gt;&lt;del&gt;删除线 倾斜 1 加粗 1&lt;/del&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;&lt;strong&gt;&lt;em&gt;删除线 倾斜 2 加粗 2&lt;/em&gt;&lt;/strong&gt;&lt;/del&gt; 和 &lt;strong&gt;&lt;em&gt;&lt;del&gt;删除线 倾斜 2 加粗 2&lt;/del&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;del&gt;&lt;em&gt;删除线 倾斜 1 加粗 1&lt;/em&gt;&lt;/del&gt;&lt;/strong&gt; 和 *&lt;del&gt;&lt;strong&gt;删除线 倾斜 1 加粗 1&lt;/strong&gt;&lt;/del&gt;*&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;del&gt;&lt;em&gt;删除线 倾斜 2 加粗 2&lt;/em&gt;&lt;/del&gt;&lt;/strong&gt; 和 _&lt;del&gt;&lt;strong&gt;删除线 倾斜 2 加粗 2&lt;/strong&gt;&lt;/del&gt;_&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;del&gt;&lt;em&gt;删除线 倾斜 2 加粗 1&lt;/em&gt;&lt;/del&gt;&lt;/strong&gt; 和 &lt;em&gt;&lt;del&gt;&lt;strong&gt;删除线 倾斜 2 加粗 1&lt;/strong&gt;&lt;/del&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;del&gt;&lt;em&gt;删除线 倾斜 1 加粗 2&lt;/em&gt;&lt;/del&gt;&lt;/strong&gt; 和 &lt;em&gt;&lt;del&gt;&lt;strong&gt;删除线 倾斜 1 加粗 2&lt;/strong&gt;&lt;/del&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;6-图片&#34;&gt;6. 图片&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;Web image
+![Web Picture](https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg &amp;quot;Web Picture&amp;quot;)
+
+Local image
+![Local Picture](/images/Apple-Devices-Preview.png)
+
+contact@revolunet.com
+
+@revolunet
+
+Issue #1
+
+https://github.com/revolunet/sublimetext-markdown-preview/
+
+This is a link https://github.com/revolunet/sublimetext-markdown-preview/.
+
+This is a link &amp;quot;https://github.com/revolunet/sublimetext-markdown-preview/&amp;quot;.
+
+With this link (https://github.com/revolunet/sublimetext-markdown-preview/), it still works.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Web image
+&lt;img src=&#34;https://static.dillonzq.com/images/20190817130904-U6cPUk.jpg&#34; alt=&#34;Web Picture&#34; title=&#34;Web Picture&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Local image
+&lt;img src=&#34;https://example.com/images/Apple-Devices-Preview.png&#34; alt=&#34;Local Picture&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.google.com&#34;&gt;https://www.google.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;mailto:contact@revolunet.com&#34;&gt;contact@revolunet.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;@revolunet&lt;/p&gt;
+
+&lt;p&gt;Issue #1&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/revolunet/sublimetext-markdown-preview/&#34;&gt;https://github.com/revolunet/sublimetext-markdown-preview/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This is a link &lt;a href=&#34;https://github.com/revolunet/sublimetext-markdown-preview/&#34;&gt;https://github.com/revolunet/sublimetext-markdown-preview/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is a link &amp;ldquo;&lt;a href=&#34;https://github.com/revolunet/sublimetext-markdown-preview/&amp;quot;&#34;&gt;https://github.com/revolunet/sublimetext-markdown-preview/&amp;quot;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;With this link (&lt;a href=&#34;https://github.com/revolunet/sublimetext-markdown-preview/&#34;&gt;https://github.com/revolunet/sublimetext-markdown-preview/&lt;/a&gt;), it still works.&lt;/p&gt;
+
+&lt;h2 id=&#34;abbreviation&#34;&gt;Abbreviation&lt;/h2&gt;
+
+&lt;p&gt;Abbreviations source are found in a separate markdown file specified in frontmatter.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;The HTML specification 
+is maintained by the W3C.
+
+*[HTML]: Hyper Text Markup Language
+*[W3C]:  World Wide Web Consortium
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The HTML specification
+is maintained by the W3C.&lt;/p&gt;
+
+&lt;h2 id=&#34;unordered-list&#34;&gt;Unordered List&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;Unordered List
+
+- item 1
+    * item A
+    * item B
+        more text
+        + item a
+        + item b
+        + item c
+    * item C
+- item 2
+- item 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Unordered List&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;item 1
+
+&lt;ul&gt;
+&lt;li&gt;item A&lt;/li&gt;
+&lt;li&gt;item B
+more text
+
+&lt;ul&gt;
+&lt;li&gt;item a&lt;/li&gt;
+&lt;li&gt;item b&lt;/li&gt;
+&lt;li&gt;item c&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;item C&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;item 2&lt;/li&gt;
+&lt;li&gt;item 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ordered-list&#34;&gt;Ordered List&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;Ordered List
+
+1. item 1
+    1. item A
+    2. item B
+        more text
+        1. item a
+        2. item b
+        3. item c
+    3. item C
+2. item 2
+3. item 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ordered List&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;item 1
+
+&lt;ol&gt;
+&lt;li&gt;item A&lt;/li&gt;
+&lt;li&gt;item B
+more text
+
+&lt;ol&gt;
+&lt;li&gt;item a&lt;/li&gt;
+&lt;li&gt;item b&lt;/li&gt;
+&lt;li&gt;item c&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;item C&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;item 2&lt;/li&gt;
+&lt;li&gt;item 3&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;mixed-lists&#34;&gt;Mixed Lists&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Really Mixed Lists&lt;/code&gt; should break with &lt;code&gt;sane_lists&lt;/code&gt; on.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Mixed Lists
+
+- item 1
+    * [X] item A
+    * [ ] item B
+        more text
+        1. item a
+        2. itemb
+        3. item c
+    * [X] item C
+- item 2
+- item 3
+
+
+Really Mixed Lists
+
+- item 1
+    * [X] item A
+    - item B
+        more text
+        1. item a
+        + itemb
+        + [ ] item c
+    3. item C
+2. item 2
+- [X] item 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Mixed Lists&lt;/p&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;item 1
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; item A&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; item B
+more text&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;item a&lt;/li&gt;
+&lt;li&gt;itemb&lt;/li&gt;
+&lt;li&gt;item c&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; item C&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;item 2&lt;/li&gt;
+&lt;li&gt;item 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Really Mixed Lists&lt;/p&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;item 1
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; item A&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;item B
+more text
+
+&lt;ol class=&#34;task-list&#34;&gt;
+&lt;li&gt;item a&lt;/li&gt;
+&lt;li&gt;itemb&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; item c&lt;/label&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;item C&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;item 2&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; item 3&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;blocks&#34;&gt;Blocks&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;    This is a block.
+
+    This is more of a block.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;This is a block.
+
+This is more of a block.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;block-quotes&#34;&gt;Block Quotes&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; This is a block quote
+&amp;gt;&amp;gt; How does it look?
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This is a block quote.
+&amp;gt; How does it look?
+I think it looks good.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;fenced-block&#34;&gt;Fenced Block&lt;/h2&gt;
+
+&lt;p&gt;Assuming guessing is not enabled.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;```
+// Fenced **without** highlighting
+function doIt() {
+    for (var i = 1; i &amp;lt;= slen ; i^^) {
+        setTimeout(&amp;quot;document.z.textdisplay.value = newMake()&amp;quot;, i*300);
+        setTimeout(&amp;quot;window.status = newMake()&amp;quot;, i*300);
+    }
+}
+```
+
+```javascript
+// Fenced **with** highlighting
+function doIt() {
+    for (var i = 1; i &amp;lt;= slen ; i^^) {
+        setTimeout(&amp;quot;document.z.textdisplay.value = newMake()&amp;quot;, i*300);
+        setTimeout(&amp;quot;window.status = newMake()&amp;quot;, i*300);
+    }
+}
+```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;// Fenced **without** highlighting
+function doIt() {
+    for (var i = 1; i &amp;lt;= slen ; i^^) {
+        setTimeout(&amp;quot;document.z.textdisplay.value = newMake()&amp;quot;, i*300);
+        setTimeout(&amp;quot;window.status = newMake()&amp;quot;, i*300);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Fenced **with** highlighting
+function doIt() {
+    for (var i = 1; i &amp;lt;= slen ; i^^) {
+        setTimeout(&amp;quot;document.z.textdisplay.value = newMake()&amp;quot;, i*300);
+        setTimeout(&amp;quot;window.status = newMake()&amp;quot;, i*300);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;tables&#34;&gt;Tables&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;| _颜色_      | 水果          | 蔬菜         |
+| ------------- |:---------------:| -----------------:|
+| red           | *苹果*         | [辣椒](#Tables) |
+| ~~橙色~~    | 橘子         | **胡萝卜**        |
+| 绿色         | ~~***梨子***~~ | 菠菜           |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;em&gt;颜色&lt;/em&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;水果&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;蔬菜&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;red&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;em&gt;苹果&lt;/em&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;&lt;a href=&#34;#Tables&#34;&gt;辣椒&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;橙色&lt;/del&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;橘子&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;&lt;strong&gt;胡萝卜&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;绿色&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;del&gt;&lt;strong&gt;&lt;em&gt;梨子&lt;/em&gt;&lt;/strong&gt;&lt;/del&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;菠菜&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Class or Enum&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;th&gt;Month&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Day&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Hours&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Minutes&lt;/th&gt;
+&lt;th&gt;Seconds*&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Zone Offset&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Zone ID&lt;/th&gt;
+&lt;th&gt;toString Output&lt;/th&gt;
+&lt;th&gt;Where Discussed&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Instant&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2013-08-20T15:16:26.355Z&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/instant.html&#34;&gt;Instant Class&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LocalDate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2013-08-20&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/date.html&#34;&gt;Date Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LocalDateTime&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2013-08-20T08:16:26.937&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/datetime.html&#34;&gt;Date and Time Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ZonedDateTime&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2013-08-21T00:16:26.941+09:00[Asia/Tokyo]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/timezones.html&#34;&gt;Time Zone and Offset Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LocalTime&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;08:16:26.943&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/datetime.html&#34;&gt;Date and Time Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;MonthDay&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;--08-20&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/date.html&#34;&gt;Date Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Year&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2013&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/date.html&#34;&gt;Date Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;YearMonth&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2013-08&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/date.html&#34;&gt;Date Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Month&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AUGUST&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/enum.html&#34;&gt;DayOfWeek and Month Enums&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;OffsetDateTime&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2013-08-20T08:16:26.954-07:00&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/timezones.html&#34;&gt;Time Zone and Offset Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;OffsetTime&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;08:16:26.957-07:00&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/timezones.html&#34;&gt;Time Zone and Offset Classes&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Duration&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;**&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;**&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;**&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;PT20H&lt;/code&gt; (20 hours)&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/period.html&#34;&gt;Period and Duration&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Period&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;center&gt;&lt;img src=&#34;https://example.com/favicon-16x16.png&#34; alt=&#34;checked&#34; /&gt;&lt;/center&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;***&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;***&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;P10D&lt;/code&gt; (10 days)&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/datetime/iso/period.html&#34;&gt;Period and Duration&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;smart-strong&#34;&gt;Smart Strong&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;Text with double__underscore__words.
+
+__Strong__ still works.
+
+__this__works__too__
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Text with double&lt;strong&gt;underscore&lt;/strong&gt;words.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Strong&lt;/strong&gt; still works.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;this&lt;/strong&gt;works&lt;strong&gt;too&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;smarty&#34;&gt;Smarty&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;double quotes&amp;quot;
+
+&#39;single quotes&#39;
+
+da--sh
+
+elipsis...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ldquo;double quotes&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;lsquo;single quotes&amp;rsquo;&lt;/p&gt;
+
+&lt;p&gt;da&amp;ndash;sh&lt;/p&gt;
+
+&lt;p&gt;elipsis&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;neseted-fences&#34;&gt;Neseted Fences&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;    ```
+    This will still be parsed
+    as a normal indented code block.
+    ```
+
+```
+This will still be parsed
+as a fenced code block.
+```
+
+- This is a list that contains multiple code blocks.
+
+    - Here is an indented block
+
+            ```
+            This will still be parsed
+            as a normal indented code block.
+            ```
+
+    - Here is a fenced code block:
+
+        ```
+        This will still be parsed
+        as a fenced code block.
+        ```
+
+        &amp;gt; ```
+        &amp;gt; Blockquotes?
+        &amp;gt; Not a problem!
+        &amp;gt; ```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;```
+This will still be parsed
+as a normal indented code block.
+```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;This will still be parsed
+as a fenced code block.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;This is a list that contains multiple code blocks.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Here is an indented block&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;```
+This will still be parsed
+as a normal indented code block.
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Here is a fenced code block:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This will still be parsed
+as a fenced code block.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;pre&gt;&lt;code&gt;Blockquotes?
+Not a problem!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;section-7&#34;&gt;Github Emoji&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;This is a test for emoji 😄.  The emojis are images linked to github assets .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a test for emoji 😄.  The emojis are images linked to github assets .&lt;/p&gt;
+
+&lt;h3 id=&#34;people&#34;&gt;People&lt;/h3&gt;
+
+&lt;p&gt;👍👎👽👼💢😠😧😲👶💙😊💥🙇👦👰💔👤👥👏😰💥😖😕👷👮👫💑:couplekiss:😢😿💘💃👯💨😞😥💫😵💧👂❗️😑👀👊👪😨🐾🔥✊😳😦🖕👧💚❕❔😬😁😀💂💇✋💩🙉❤️😍😻💓💗😯👿💁😇👺👹😂😹💋😗😽😚😘😙😆👄💌👨👲👳😷💆🤘💪🎵💅😐🙅😶👃🎶👌🙆👴👵👐😮😔😣🙍👱🙎👇👈👉☝️👆💩😾🙏👸👊💜❓😡✋🙌🙋☺️😌💞🏃🏃😆😱🙀🙈💩💀😴😪😄😸😃😺😈😏😼😭✨💖🙊💬⭐️🌟😛😝😜😎😓💦😅💭👎👍😫👅😤💕👬👭😒✌️🚶👋😩😉👩😟💛😋💤&lt;/p&gt;
+
+&lt;h3 id=&#34;nature&#34;&gt;Nature&lt;/h3&gt;
+
+&lt;p&gt;🐜🐤🐻🐝🐞🐦🌼🐡🐗💐🐛🌵🐫🐱🐈🌸🌰🐔☁️🐮🐄🌙🐊🌀🌳🐶🐕🐬🐉🐲🐪🌾🌍🌎🌏🐘🌲🍂🌓🌛🐟🌁🍀🐸🌕🌝🌐🐐🐹🐥🐣🌿🌺🐝🐴🐨🌗🌜🍃🐆🍁🌌🐒🐵🌔🐭🐁🍄🌑🌚🌃🌊🐙🐂🌴🐼⛅️🐾🐧🐷🐖🐽🐩🐰🐇🐎🐏🐀🐓🌹🌱🐑🐚🐌🐍❄️⛄️🌞🌻☀️🐯🐅🐠🌷🐢☔️🌋🌘🌖🐃🌒🌔🐳🐋🐺⚡️&lt;/p&gt;
+
+&lt;h3 id=&#34;objects&#34;&gt;Objects&lt;/h3&gt;
+
+&lt;p&gt;🎱⏰🍎🎨👟🍼🎈🎍🍌📊⚾️🏀🛀🛁🔋🍺🍻🔔🍱🚴👙🎂🃏✒️📘💣📖🔖📑📚👢🎳🍞💼💡🍰📆📲📷🍬📇💿📉📈🍒🍫🎄🎬📋📕🔐🌂♣️🍸☕️💻🎊🍪🌽💳👑🔮🍛🍮🍡🎯📅♦️💵🎎🚪🍩👗📀📧🥚🍆🔌✉️✉️📩💶👓📠📁🎆🍥🎣🎏🔦🐬💾🎴🏈👣🍴🍤🍟🎲💎👻🎁💝⛳️🍇🍏📗🎸🔫🍔🔨👜🎧♥️🔆👠🔪🍯🏇⌛️⏳🍨🍦📥📨📱🎃👖🔑👘🏮📒🍋💄🔒🔏🍭➿🔊📢🔅🔍🔎🀄️📫📪📬📭👞🍖📣🍈📝🎤🔬💽💸💰🎓🚵🎥🎹🎼🔇📛👔📰🔕📓📔🔩🍢📖📂📙📤📦📄📃📟📎🍑🍐📝✏️☎️💊🍍🍕📯📮👝🍗💷👛📌📻🍜🎀🍚🍙🍘🎑💍🏉🎽🍶👡🎅📡🎷🎒✂️📜💺🍧👕👞🚿🎿🚬🏂⚽️🔉👾♠️🍝❇️🎇🔈🍲📏🍓🏄🍣🍠🏊💉🎉🎋🍊🍵☎️📞🔭🎾🚽🍅🎩📐🏆🍹🎺👕📺🔓📼📹🎮🎻⌚️🍉🎐🍷👚👒🔧💴&lt;/p&gt;
+
+&lt;h3 id=&#34;places&#34;&gt;Places&lt;/h3&gt;
+
+&lt;p&gt;🚡✈️🚑⚓️🚛🏧🏦💈🔰🚲🚙⛵️🌉🚅🚄🚌🚏🚗🎠🏁⛪️🎪🌇🌆🇨🇳🚧🏪🎌🇩🇪🏬🇪🇸🏰🏤🏭🎡🚒⛲️🇫🇷⛽️🇬🇧🚁🏥🏨♨️🏠🏡🇮🇹🏮🗾🏯🇯🇵🇰🇷🚈🏩🚐🚝🗻🚠🚞🗿🏢🚘🚍🚔🚖🎭🚓🏣🚃🌈🚗🚀🎢🚨📍🚣🇷🇺⛵️🏫🚢🎰🚤🌠🚉🗽🚂🌅🌄🚟🚕⛺️🎫🗼🚜🚥🚋🚆🚊🚩🚎🚚🇬🇧🇺🇸🚦⚠️💒&lt;/p&gt;
+
+&lt;h3 id=&#34;symbols&#34;&gt;Symbols&lt;/h3&gt;
+
+&lt;p&gt;💯🔢🅰️🆎🔤🔡🉑♒️♈️◀️⏬⏫⬇️🔽▶️⤵️⤴️⬅️↙️↘️➡️↪️⬆️↕️🔼↖️↗️🔃🔄🅱️🚼🔙🛄☑️‼️⚫️⬛️◾️◼️▪️🔲♋️🔠♑️💹🚸🎦🆑🕐🕙🕥🕚🕦🕛🕧🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕡🕖🕢🕗🕣🕘🕤㊗️🆒©️➰💱🛃💠🚯8️⃣✴️✳️🔚⏩5️⃣4️⃣🆓♊️#️⃣💟✔️➗💲❗️➖✖️➕🆔🉐ℹ️⁉️🔟🈁🔵🔷🔶🛅↔️↩️♌️♎️🔗Ⓜ️🚹🚇📴❎🆕🆖9️⃣🚳⛔️🚫📵🚷🚭🚱⭕️🅾️🆗🔛1️⃣⛎🅿️〽️🛂♓️🚰🚮🔘♻️🔴®️🔁🔂🚻⏪🈂️♐️♏️㊙️7️⃣📶6️⃣🔯🔹🔸🔺🔻🔜🆘🔣♉️3️⃣™️🔝🔱🔀2️⃣🈹🈴🈺🈯️🈷️🈶🈵🈚️🈸🈲🈳🔞🆙📳♍️🆚〰️🚾♿️✅⚪️💮⬜️◽️◻️▫️🔳🚺❌0️⃣&lt;/p&gt;
+
+&lt;h2 id=&#34;insert&#34;&gt;Insert&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;^^insert^^
+
+^^*insert 倾斜*^^  *^^insert 倾斜 2^^*
+
+^^_insert 倾斜_^^  _^^insert 倾斜 2^^_
+
+^^**insert 加粗**^^  **^^insert 加粗 2^^**
+
+^^__insert 加粗__^^  __^^insert 加粗 2^^__
+
+^^***insert 倾斜 加粗***^^  ***^^insert 倾斜 加粗 2^^***
+
+^^___insert 倾斜 加粗___^^  ___^^insert 倾斜 加粗 2^^___
+
+**^^*insert 倾斜 加粗*^^**  *^^**insert 倾斜 加粗 2**^^*
+
+__^^_insert 倾斜 加粗_^^__  _^^__insert 倾斜 加粗 2__^^_
+
+**^^_insert 倾斜 加粗_^^**  _^^**insert 倾斜 加粗 2**^^_
+
+__^^*insert 倾斜 加粗*^^__  *^^__insert 倾斜 加粗 2__^^*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;^^insert^^&lt;/p&gt;
+
+&lt;p&gt;^^&lt;em&gt;insert 倾斜&lt;/em&gt;^^  &lt;em&gt;^^insert 倾斜 2^^&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;^^&lt;em&gt;insert 倾斜&lt;/em&gt;^^  &lt;em&gt;^^insert 倾斜 2^^&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;^^&lt;strong&gt;insert 加粗&lt;/strong&gt;^^  &lt;strong&gt;^^insert 加粗 2^^&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;^^&lt;strong&gt;insert 加粗&lt;/strong&gt;^^  &lt;strong&gt;^^insert 加粗 2^^&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;^^&lt;strong&gt;&lt;em&gt;insert 倾斜 加粗&lt;/em&gt;&lt;/strong&gt;^^  &lt;strong&gt;&lt;em&gt;^^insert 倾斜 加粗 2^^&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;^^&lt;strong&gt;&lt;em&gt;insert 倾斜 加粗&lt;/em&gt;&lt;/strong&gt;^^  &lt;strong&gt;&lt;em&gt;^^insert 倾斜 加粗 2^^&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;^^&lt;em&gt;insert 倾斜 加粗&lt;/em&gt;^^&lt;/strong&gt;  *^^&lt;strong&gt;insert 倾斜 加粗 2&lt;/strong&gt;^^*&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;^^&lt;em&gt;insert 倾斜 加粗&lt;/em&gt;^^&lt;/strong&gt;  _^^&lt;strong&gt;insert 倾斜 加粗 2&lt;/strong&gt;^^_&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;^^&lt;em&gt;insert 倾斜 加粗&lt;/em&gt;^^&lt;/strong&gt;  &lt;em&gt;^^&lt;strong&gt;insert 倾斜 加粗 2&lt;/strong&gt;^^&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;^^&lt;em&gt;insert 倾斜 加粗&lt;/em&gt;^^&lt;/strong&gt;  &lt;em&gt;^^&lt;strong&gt;insert 倾斜 加粗 2&lt;/strong&gt;^^&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;admonition&#34;&gt;Admonition&lt;/h2&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-pencil-alt&#34;&gt;&lt;/i&gt;Admonition note&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition abstract&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-list-ul&#34;&gt;&lt;/i&gt;Admonition abstract&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition info&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-info-circle&#34;&gt;&lt;/i&gt;Admonition info&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition tip&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-lightbulb&#34;&gt;&lt;/i&gt;Admonition tip&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition success&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-check-circle&#34;&gt;&lt;/i&gt;Admonition success&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition question&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-question-circle&#34;&gt;&lt;/i&gt;Admonition question&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-exclamation-triangle&#34;&gt;&lt;/i&gt;Admonition warning&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition failure&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-times-circle&#34;&gt;&lt;/i&gt;Admonition failure&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition danger&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-skull-crossbones&#34;&gt;&lt;/i&gt;Admonition danger&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition bug&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-bug&#34;&gt;&lt;/i&gt;Admonition bug&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition example&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-list-ol&#34;&gt;&lt;/i&gt;Admonition example&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition quote&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;&lt;i class=&#34;icon fas fa-quote-right&#34;&gt;&lt;/i&gt;Admonition quote&lt;/p&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;details class=&#34;admonition note&#34;&gt;&lt;summary class=&#34;admonition-title&#34;&gt;
+                    &lt;i class=&#34;icon fas fa-pencil-alt&#34;&gt;&lt;/i&gt;Admonition&lt;i class=&#34;details fas fa-angle-down&#34;&gt;&lt;/i&gt;
+                &lt;/summary&gt;&lt;p&gt;This is the content of the admonition.&lt;/p&gt;
+&lt;/details&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;这是一个基本的数字脚注
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:label&#34;&gt;带有 &amp;ldquo;label&amp;rdquo; 标签的脚注
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:label&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:DEF&#34;&gt;下定义的脚注
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:DEF&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:pa&#34;&gt;&lt;a href=&#34;https://github.com/dillonzq/LoveIt&#34;&gt;LoveIt 主题&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:pa&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description>
+            </item></channel>
+</rss>

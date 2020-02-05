@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>url on Mr.lemom</title>
+    <link>https://example.com/tags/url/</link>
+    <description>Recent content in url on Mr.lemom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sat, 07 Sep 2019 12:11:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/url/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>浅析URL</title>
+      <link>https://example.com/2019/09/%E6%B5%85%E6%9E%90url/</link>
+      <pubDate>Sat, 07 Sep 2019 12:11:09 +0800</pubDate>
+      
+      <guid>https://example.com/2019/09/%E6%B5%85%E6%9E%90url/</guid>
+      <description>URL的定义 统一资源标识符（英语：Uniform Resource Identifier，缩写：URI）在计算机术语中是一个用于标识某一互联网资源名称的字符串</description>
+    </item>
+    
+  </channel>
+</rss>

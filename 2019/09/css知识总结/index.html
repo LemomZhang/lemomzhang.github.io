@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>CSS 知识总结 | Mr.lemom</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="MR.Lemom"><link rel="prev" href="https://example.com/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" /><link rel="next" href="https://example.com/2019/09/%E6%B5%85%E6%9E%90url/" /><link rel="canonical" href="https://example.com/2019/09/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSS 知识总结"/>
+<meta name="twitter:description" content="CSS发明 CSS首先由赖先生（Hakon Wium Lie）提出 CSS的牛X之处 层叠样式表 样式层叠：可以多次对用已选择器进行样式声明 选择器层叠：可以用"/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CSS 知识总结",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/2019\/09\/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "css","wordcount":  652 ,
+        "url": "https:\/\/example.com\/2019\/09\/css%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93\/","datePublished": "2019-09-07T11:00:09\x2b08:00","dateModified": "2019-09-07T11:00:09\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://example.com/">Mr.lemom</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item"
+                href="https://example.com/posts" title="">文章</a><a class="menu-item"
+                href="https://example.com/tags" title="">标签</a><a class="menu-item"
+                href="https://example.com/categories" title="">分类</a><a class="menu-item"
+                href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://example.com/">Mr.lemom</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="https://example.com/posts" title="">文章</a><a class="menu-item" href="https://example.com/tags" title="">标签</a><a class="menu-item" href="https://example.com/categories" title="">分类</a><a class="menu-item" href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">CSS 知识总结</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="https://example.com/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>lemom
+                </a>&nbsp;</div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-09-07>2019-09-07</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 652 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 2 分钟&nbsp;</div>
+        </div><div class="post-content">
+
+<h1 id="css发明">CSS发明</h1>
+
+<blockquote>
+<p>CSS首先由赖先生（Hakon Wium Lie）提出</p>
+</blockquote>
+
+<h1 id="css的牛x之处">CSS的牛X之处</h1>
+
+<ul>
+<li>层叠样式表
+
+<ol>
+<li>样式层叠：可以多次对用已选择器进行样式声明</li>
+<li>选择器层叠：可以用不同选择器对同一个元素进行样式声明</li>
+<li>文件层叠：可以用多个文件进行层叠</li>
+</ol></li>
+<li>重要版本
+
+<ol>
+<li>CSS2.1(2004~2011年)使用最广泛的版本(IE支持)</li>
+<li>CSS3(1999年开始起草)现代版本，分模块(IE8部分支持)
+<br /></li>
+</ol></li>
+</ul>
+
+<blockquote>
+<p>支持的浏览器以及特性可去caniuse.com</p>
+</blockquote>
+
+<h1 id="css语法">CSS语法</h1>
+
+<pre><code>/*语法一：*/
+选择器{
+    属性名：属性值;
+}
+
+/*语法二：at语法*/
+@charset &quot;UTF-8&quot;;
+@import url(2.css);
+@media (min-width:100px) and (max-width:200px){
+    语法一
+}
+</code></pre>
+
+<h1 id="重要概念">重要概念</h1>
+
+<ol>
+<li>文档流Normal Flow</li>
+<li>块，内联，内联块</li>
+<li>margin合并</li>
+
+<li><p>两种盒模型(border-box,content-box)</p>
+
+<h1 id="浏览器渲染原理">浏览器渲染原理</h1>
+
+<p><strong>步骤</strong>：</p></li>
+
+<li><p>根据HTML构建HTML树</p></li>
+
+<li><p>根据CSS构建CSS树</p></li>
+
+<li><p>将两颗树合并成一颗渲染树</p></li>
+
+<li><p>Layout布局(文档流，盒模型，计算大小和位置)</p></li>
+
+<li><p>Paint绘制(把边框颜色，文字颜色，阴影等画出来)</p></li>
+
+<li><p>Compose合成(根据层叠关系展示画面)</p></li>
+</ol>
+
+<h1 id="css动画的两种做法">CSS动画的两种做法</h1>
+
+<ol>
+<li>transition(过渡)
+&gt; 一般配合transform(变形)使用</li>
+</ol>
+
+<blockquote>
+<p>作用：补充中间帧</p>
+
+<p>语法：transition:属性名 时长 过渡方式 延迟
+(left 200ms linear)</p>
+
+<p>可以用逗号分隔两个不同属性，如(transition:left 200ms,top 400ms)，可以用all代替所有属性，如(transition:all 200ms)
+2. animation</p>
+</blockquote>
+
+<pre><code>缩写语法：时长|过渡方式|延迟|次数|方向|填充模式|是否暂停|动画名;
+</code></pre>
+
+<pre><code class="language-css">.eye{
+    animation: 4s linear 0s infinite alternate move_eye;
+}
+@keyframes move_eye { from { margin-left: -20%; } to { margin-left: 100%; }  }
+
+/*@keyframes还可以是百分数*/
+</code></pre>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-09-07 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span class="tag">
+                        <a href="https://example.com/tags/css/"><i class="fas fa-tag fa-fw"></i>&nbsp;css</a>&nbsp;
+                    </span></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://example.com/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="https://example.com/2019/09/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="prev" rel="prev" title="HTML入门笔记1"><i class="fas fa-angle-left fa-fw"></i>HTML入门笔记1</a>
+            <a href="https://example.com/2019/09/%E6%B5%85%E6%9E%90url/" class="next" rel="next" title="浅析URL">浅析URL<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a
+                    href="https://example.com/" target="_blank">lemom</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
+            });
+        });
+    </script><script src="/js/blog.min.js"></script></body>
+</html>

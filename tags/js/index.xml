@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>js on Mr.lemom</title>
+    <link>https://example.com/tags/js/</link>
+    <description>Recent content in js on Mr.lemom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 22 Sep 2019 20:10:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://example.com/tags/js/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JS对象基本用法</title>
+      <link>https://example.com/2019/09/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Sun, 22 Sep 2019 20:10:09 +0800</pubDate>
+      
+      <guid>https://example.com/2019/09/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+      <description>对象基础 定义： 无序数据集合 键值对的集合 写法： let obj={&#39;name&#39;:&#39;lemom&#39;, &#39;age&#39;:18} let obj = new Object({&#39;name&#39;:&#39;lemom&#39; }) cosole.log({&#39;name&#39;:&#39;lemom&#39;, &#39;age&#39;:18}) 细节 键名是字符串，不是标识符，可包含任意字符 引号可省略，省略后只能写标识符</description>
+    </item>
+    
+    <item>
+      <title>JS基本语法</title>
+      <link>https://example.com/2019/09/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Tue, 10 Sep 2019 12:11:09 +0800</pubDate>
+      
+      <guid>https://example.com/2019/09/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+      <description>表达式和语句 二者的区别：表达式一般都有值，语句可能有也可能没有； 语句一般会改变环境（声明，赋值）； * 表达式： 1+2表达式值为3; add(1,</description>
+    </item>
+    
+    <item>
+      <title>探索JavaScript的发展</title>
+      <link>https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/</link>
+      <pubDate>Sat, 07 Sep 2019 19:11:09 +0800</pubDate>
+      
+      <guid>https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/</guid>
+      <description>1.JavaScript概念 JavaScript（通常缩写为JS）是一种高级的、解释型的编程语言。JavaScript是一门基于原型、函数先</description>
+    </item>
+    
+  </channel>
+</rss>

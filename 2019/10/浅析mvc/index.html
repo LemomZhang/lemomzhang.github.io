@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>浅析MVC | Mr.lemom</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="MR.Lemom"><link rel="prev" href="https://example.com/2019/10/jquery%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" /><link rel="next" href="https://example.com/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/" /><link rel="canonical" href="https://example.com/2019/10/%E6%B5%85%E6%9E%90mvc/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浅析MVC"/>
+<meta name="twitter:description" content="MVC 三个对象 MVC是一种架构模式，它将应用抽象为3个部分：模型（数据）、视图、控制器（分发器）。 MVC包括三类对象，将他们分离以提高灵活性和复"/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "浅析MVC",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/2019\/10\/%E6%B5%85%E6%9E%90mvc\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "MVC","wordcount":  1168 ,
+        "url": "https:\/\/example.com\/2019\/10\/%E6%B5%85%E6%9E%90mvc\/","datePublished": "2019-10-20T00:00:00\x2b00:00","dateModified": "2019-10-20T00:00:00\x2b00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://example.com/">Mr.lemom</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item"
+                href="https://example.com/posts" title="">文章</a><a class="menu-item"
+                href="https://example.com/tags" title="">标签</a><a class="menu-item"
+                href="https://example.com/categories" title="">分类</a><a class="menu-item"
+                href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://example.com/">Mr.lemom</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="https://example.com/posts" title="">文章</a><a class="menu-item" href="https://example.com/tags" title="">标签</a><a class="menu-item" href="https://example.com/categories" title="">分类</a><a class="menu-item" href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">浅析MVC</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="https://example.com/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>lemom
+                </a>&nbsp;<span class="post-category">收录于&nbsp;<i class="far fa-folder fa-fw"></i><a href="https://example.com/categories/web%E5%89%8D%E7%AB%AF/">Web前端</a>&nbsp;</span></div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-10-20>2019-10-20</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 1168 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;</div>
+        </div><div class="post-content">
+
+<a class="post-dummy-target" id="mvc-三个对象"></a><h2>MVC 三个对象</h2>
+
+<p><code>MVC</code>是一种架构模式，它将应用抽象为3个部分：模型（数据）、视图、控制器（分发器）。</p>
+
+<p><code>MVC</code>包括三类对象，将他们分离以提高灵活性和复用性。</p>
+
+<p>M：模型model用于封装与应用程序的业务逻辑相关的数据以及对数据的处理方法，会有一个或多个视图监听此模型。一旦模型的数据发生变化，模型将通知有关的视图。</p>
+
+<pre><code>const model = {
+    //数据
+    data: ''
+    //初始化
+    init(){}
+    //方法
+    save(){}
+    update(){}
+}
+</code></pre>
+
+<p>V：视图view是它在屏幕上的表示，描绘的是model的当前状态。当模型的数据发生变化，视图相应地得到刷新自己的机会。</p>
+
+<pre><code>const view = {
+    init() {}
+    template: '&lt;h1&gt;hello&lt;/h1'&gt;   //视图渲染
+}
+</code></pre>
+
+<p>C：控制器controller定义用户界面对用户输入的响应方式，起到不同层面间的组织作用，用于控制应用程序的流程，它处理用户的行为和数据model上的改变。</p>
+
+<pre><code>const controller = {
+    view: null,
+    model: null,
+    init(view, model){
+        this.view = view
+        this.model = model
+        this.bindEvents()
+    }
+    render(){
+        this.view.querySelector('name').innerText = this.model.data.name
+    },
+    bindEvents(){}
+}
+</code></pre>
+
+<a class="post-dummy-target" id="eventbus"></a><h2>EventBus</h2>
+
+<p>EventBus是一种设计模式，主要用于组件或对象间的通信简化
+EventBus包含很多方法，如：on方法用来监听事件，trigger方法用来触发事件</p>
+
+<pre><code>const model = {
+    data: {
+        i: come from somewhere
+    }，
+    update(data) {
+        Object.assign(model.data, data)
+        eventBus.trigger('model:updated')   //触发 model:updated 事件
+    }
+}
+const controller = {
+    //初始化方法
+    init() {
+        //初始化渲染
+        view.render(model.data.i)
+        eventBus.on('model:updated', () =&gt; {    //监听 model:updated 方法并渲染更新页面
+            v.render(model.data.i)
+        })
+    },
+
+}
+</code></pre>
+
+<a class="post-dummy-target" id="表驱动编程"></a><h2>表驱动编程</h2>
+
+<p>所谓表驱动法(Table-Driven Approach),简单讲是指用查表的方法获取值。</p>
+
+<p>假设我们要把一个数字的数组按星期几的形式输出，那么我们可能这样做：</p>
+
+<pre><code>let arr=[2,5,6,3]
+let newArr =[]
+arr.forEach(item=&gt;{
+  if(item===1){
+    newArr.push('星期一')
+  }else if(item===2){
+    newArr.push('星期二')
+  }else if(item===3){
+    newArr.push('星期三')
+  }else if(item===4){
+    newArr.push('星期四')
+  }else if(item===5){
+    newArr.push('星期五')
+  }else if(item===6){
+    newArr.push('星期六')
+  }else{
+    newArr.push('星期日')
+  }
+})
+console.log(newArr)
+</code></pre>
+
+<p>如上这样可能写很多类似的代码，如果用表驱动法可以这样做：</p>
+
+<pre><code>const week={
+  1:&quot;星期一&quot;,
+  2:&quot;星期二&quot;,
+  3:&quot;星期三&quot;,
+  4:&quot;星期四&quot;,
+  5:&quot;星期五&quot;,
+  6:&quot;星期六&quot;,
+  7:&quot;星期日&quot;
+}
+arr.forEach(item=&gt;{
+  newArr.push(week[item])
+})
+console.log(newArr)
+</code></pre>
+
+<p>由此可看出，使用表驱动可以简化代码，使结构更加简洁清晰</p>
+
+<a class="post-dummy-target" id="模块化理解"></a><h2>模块化理解</h2>
+
+<p>首先假如没有模块化，引入外部文件是这样的:</p>
+
+<pre><code>&lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;a.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;b.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;c.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>所有js文件都放在了一起，而且这些文件的顺序也不能出错，如jquery需要先引入，才能在其他的文件中使用jquery，缺点如下：
+* 污染全局作用域
+* 维护成本高
+* 依赖关系不明显</p>
+
+<p>ES6使用 import 关键字引入模块，通过 exprot 关键字导出模块使用模块化：</p>
+
+<pre><code>//方法一：导出需要的数据
+var arr=[]
+var str='haha'
+export {
+	arr,str
+}
+import {arr,str} from './info.js'
+//方法二：让导入者自己命名
+export default function (){
+	console.log(&quot;ooooo&quot;)
+}
+import myFunc from './info.js'
+//方法三：定义时直接导出
+export var num = 100
+export function mul(num1,num2){
+    return num1+num2
+}
+//导入全部模块
+import * as aaa from './info.js'
+console.log(aaa.属性)
+</code></pre>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-10-20 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span class="tag">
+                        <a href="https://example.com/tags/mvc/"><i class="fas fa-tag fa-fw"></i>&nbsp;MVC</a>&nbsp;
+                    </span></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://example.com/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="https://example.com/2019/10/jquery%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="prev" rel="prev" title="JQuery基本操作"><i class="fas fa-angle-left fa-fw"></i>JQuery基本操作</a>
+            <a href="https://example.com/2019/11/%E6%B5%85%E6%9E%90vue%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC/" class="next" rel="next" title="浅析Vue两个版本">浅析Vue两个版本<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a
+                    href="https://example.com/" target="_blank">lemom</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
+            });
+        });
+    </script><script src="/js/blog.min.js"></script></body>
+</html>

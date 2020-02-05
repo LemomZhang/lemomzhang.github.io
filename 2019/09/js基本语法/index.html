@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>JS基本语法 | Mr.lemom</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="MR.Lemom"><link rel="prev" href="https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/" /><link rel="next" href="https://example.com/2019/09/%E5%AE%89%E8%A3%85node%E5%90%8Enpm%E6%8A%A5%E9%94%99/" /><link rel="canonical" href="https://example.com/2019/09/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS基本语法"/>
+<meta name="twitter:description" content="表达式和语句 二者的区别：表达式一般都有值，语句可能有也可能没有； 语句一般会改变环境（声明，赋值）； * 表达式： 1&#43;2表达式值为3; add(1,"/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JS基本语法",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/2019\/09\/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "js","wordcount":  800 ,
+        "url": "https:\/\/example.com\/2019\/09\/js%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/","datePublished": "2019-09-10T12:11:09\x2b08:00","dateModified": "2019-09-10T12:11:09\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.com\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://example.com/">Mr.lemom</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item"
+                href="https://example.com/posts" title="">文章</a><a class="menu-item"
+                href="https://example.com/tags" title="">标签</a><a class="menu-item"
+                href="https://example.com/categories" title="">分类</a><a class="menu-item"
+                href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://example.com/">Mr.lemom</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="https://example.com/posts" title="">文章</a><a class="menu-item" href="https://example.com/tags" title="">标签</a><a class="menu-item" href="https://example.com/categories" title="">分类</a><a class="menu-item" href="https://hugo-loveit-en.netlify.com" title="English"></a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"
+                    title="切换主题"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">JS基本语法</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="https://example.com/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>lemom
+                </a>&nbsp;</div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-09-10>2019-09-10</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 800 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 2 分钟&nbsp;</div>
+        </div><div class="post-content">
+
+<h1 id="表达式和语句">表达式和语句</h1>
+
+<blockquote>
+<p>二者的区别：表达式一般都有值，语句可能有也可能没有；
+语句一般会改变环境（声明，赋值）；
+* 表达式：
+1+2表达式值为3;<br>
+add(1,2)表达式的值是add函数的返回值（<strong>只有函数才有返回值</strong>）;<br>
+console.log的值是函数本身;<br>
+console.log(3)表达式的值为undefined，因为函数的返回值是undefined;<br>
+* 语句：
+var a=1表示一个语句</p>
+
+<pre><code class="language-!">大小写敏感：
+var a和var A是不同的；
+object和Object是不同的；
+function和Function是不同的; 
+</code></pre>
+
+<h1 id="标识符的规则">标识符的规则</h1>
+
+<ul>
+<li>规则：
+
+<ol>
+<li>第一个字符可以是Unicode字母或$或_或中文</li>
+<li>后面的字符，除了上面的还可以是数字</li>
+</ol></li>
+<li>变量名(举例)：
+
+<ul>
+<li>var _ = 1</li>
+<li>var $ = 2</li>
+<li>var ______ = 6</li>
+<li>var 你好 = &lsquo;hi&rsquo;</li>
+</ul></li>
+</ul>
+</blockquote>
+
+<h1 id="if-else-语句">if-else 语句</h1>
+
+<a class="post-dummy-target" id="if语句"></a><h2>if语句:</h2>
+
+<ul>
+<li><p>语法:
+if(表达式){语句1}else{语句2}；<br>
+{}在语句只有一句的时候可省略，但不建议这样做<br>
+一道面试题：</p>
+
+<pre><code class="language-javascript">a=1
+if (a === 2)
+    console.log('a')
+    console.log('a等于2')
+        
+    //结果为a等于2，因为省略{}的时候，只对离{}最近的一句语句有效果
+</code></pre></li>
+
+<li><p>最推荐使用的写法</p>
+
+<pre><code class="language-javascript">if(表达式){
+语句
+}else if(表达式){
+语句
+}else{
+语句
+}
+</code></pre>
+
+<blockquote>
+<p>只有一个判断值的时候可以用问号冒号表达式：<br>
+表达式1？表达式2：表达式3</p>
+</blockquote></li>
+</ul>
+
+<h1 id="while语句">while语句</h1>
+
+<ul>
+<li>语法:<br>
+while(表达式){语句}<br>
+判断表达式的真假<br>
+当表达式为真，执行语句，执行完再判断表达式的真假<br>
+当表达式为假，执行后面的语句</li>
+</ul>
+
+<h1 id="for-语句">for 语句</h1>
+
+<ol>
+<li><p>for可以看作是whlie循环的方便写法</p>
+
+<pre><code class="language-javascript">for(语句1;表达式2;语句3){
+循环体
+}
+/*
+1.先执行语句1
+2.然后判断表达式2
+3.如果为真，执行循环体，然后执行语句3
+4.如果为假，直接退出循环，执行后面的语句
+*/
+</code></pre>
+
+<h1 id="break与continue">break与continue</h1>
+
+<p>区别：<br></p></li>
+
+<li><p>前者是退出所有循环</p></li>
+
+<li><p>后者退出当前的一次循环</p></li>
+</ol>
+
+<h1 id="label">label</h1>
+
+<ul>
+<li><p>语法</p>
+
+<pre><code class="language-javascript">foo:{
+console.log(1);
+break foo;
+console.log('该处不执行')
+}
+console.log(2)
+//执行结果为1,2
+</code></pre></li>
+
+<li><p>表示的是一个标记语句</p></li>
+
+<li><p>面试相关</p>
+
+<pre><code class="language-javascript">{
+foo:1
+}
+//上面是对象吗
+//否，返回的是一个label，值为1
+</code></pre></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2019-09-10 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span class="tag">
+                        <a href="https://example.com/tags/js/"><i class="fas fa-tag fa-fw"></i>&nbsp;js</a>&nbsp;
+                    </span></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://example.com/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="https://example.com/2019/09/%E6%8E%A2%E7%B4%A2javascript%E7%9A%84%E5%8F%91%E5%B1%95/" class="prev" rel="prev" title="探索JavaScript的发展"><i class="fas fa-angle-left fa-fw"></i>探索JavaScript的发展</a>
+            <a href="https://example.com/2019/09/%E5%AE%89%E8%A3%85node%E5%90%8Enpm%E6%8A%A5%E9%94%99/" class="next" rel="next" title="安装node后npm报错">安装node后npm报错<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright">
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a
+                    href="https://example.com/" target="_blank">lemom</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
+            });
+        });
+    </script><script src="/js/blog.min.js"></script></body>
+</html>
